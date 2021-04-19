@@ -12,11 +12,6 @@ export default function Home({ instagramPosts, products, helpers }) {
   const { locale } = useRouter()
 
   useEffect(() => {
-    _.forEach(document.querySelectorAll('.video-bg'), (video) => {
-      video.play()
-    })
-
-    const videos = Array.from(document.querySelectorAll('.video-bg'))
     const images = Array.from(document.querySelectorAll('.lazy-img'))
 
     if ('IntersectionObserver' in window) {
@@ -30,20 +25,7 @@ export default function Home({ instagramPosts, products, helpers }) {
         })
       })
 
-      const videoObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const video = entry.target
-            video.play()
-            video.autoplay = true
-            video.playsInline = true
-            videoObserver.unobserve(video)
-          }
-        })
-      })
-
       images.forEach((img) => imageObserver.observe(img))
-      videos.forEach((video) => videoObserver.observe(video))
     }
   }, [])
 
@@ -76,6 +58,8 @@ export default function Home({ instagramPosts, products, helpers }) {
                 poster='/video/bg.jpg'
                 loop
                 muted
+                autoPlay
+                playsInline
               >
                 <source src='/video/bg.webm' type='video/webm' />
                 <source src='/video/bg.mp4' type='video/mp4' />
@@ -99,6 +83,8 @@ export default function Home({ instagramPosts, products, helpers }) {
                 poster='/video/bg-video.jpg'
                 loop
                 muted
+                autoPlay
+                playsInline
               >
                 <source src='/video/bg-video.webm' type='video/webm' />
                 <source src='/video/bg-video.mp4' type='video/mp4' />

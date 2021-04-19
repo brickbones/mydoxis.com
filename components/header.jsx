@@ -55,7 +55,7 @@ export default function Header({ helpers, checkout }) {
 
   return (
     <header className='md:w-20 md:h-screen'>
-      <div className='fixed left-0 right-0 z-50 flex items-center justify-between w-screen px-5 py-3 bg-gradient-to-b from-[#F6581EFF] to-[#F6581E00] md:from-gray-400 md:to-gray-200 md:flex-col md:h-screen md:z-50 md:bg-gradient-to-b md:w-20 md:px-0 md:py-5'>
+      <div className='fixed left-0 right-0 z-50 flex items-center justify-between w-screen px-5 py-3 bg-gradient-to-b from-[#F6581E88] to-[#F6581E00] md:from-gray-400 md:to-gray-200 md:flex-col md:h-screen md:z-50 md:bg-gradient-to-b md:w-20 md:px-0 md:py-5'>
         <Link
           className='flex-1 py-3 md:flex-none md:py-0'
           href='/'

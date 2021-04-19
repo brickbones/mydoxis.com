@@ -111,7 +111,7 @@ export default function Product({ product, helpers }) {
               <h1 className='text-5xl font-bold'>{product.title}</h1>
               <h4 className='mb-10 text-3xl font-bold text-gray-500'>{`${product.variants[0].priceV2.currencyCode} $${state.price}`}</h4>
               {description && <p className='mb-10'>{description}</p>}
-              <div className='flex items-end text-base'>
+              <div className='flex flex-col text-base sm:items-end sm:flex-row'>
                 {_.map(product.options, ({ id, name, values }) => {
                   return (
                     <label className='m-1.5' key={id}>
@@ -151,7 +151,7 @@ export default function Product({ product, helpers }) {
                   />
                 </label>
                 <button
-                  className='m-1.5 flex-1 px-4 py-1.5 bg-orange-500 rounded whitespace-nowrap text-gray-50 font-bold disabled:bg-gray-400 disabled:text-gray-300'
+                  className='w-full m-1.5 flex-1 px-4 py-1.5 bg-orange-500 rounded whitespace-nowrap text-gray-50 font-bold disabled:bg-gray-400 disabled:text-gray-300'
                   disabled={!isVariantAvailable()}
                   onClick={handleClick}
                 >
