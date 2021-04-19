@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import _ from 'lodash'
 import Client from 'shopify-buy'
 import Image from 'next/image'
-import Instagram from 'instagram-web-api'
 import Layout from '../components/layout'
 import SwiperCore, { Autoplay, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -17,6 +16,7 @@ export default function Home({ instagramPosts, products, helpers }) {
       video.play()
     })
 
+    const videos = Array.from(document.querySelectorAll('.video-bg'))
     const images = Array.from(document.querySelectorAll('.lazy-img'))
 
     if ('IntersectionObserver' in window) {
@@ -25,12 +25,25 @@ export default function Home({ instagramPosts, products, helpers }) {
           if (entry.isIntersecting) {
             const image = entry.target
             image.src = image.dataset.src
+            console.log('Showed the image', image)
             imageObserver.unobserve(image)
           }
         })
       })
 
+      const videoObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const video = entry.target
+            video.play()
+            console.log('Started the video', video)
+            videoObserver.unobserve(video)
+          }
+        })
+      })
+
       images.forEach((img) => imageObserver.observe(img))
+      videos.forEach((video) => videoObserver.observe(video))
     }
   }, [])
 
@@ -222,21 +235,19 @@ export default function Home({ instagramPosts, products, helpers }) {
             1024: { slidesPerView: 4 },
           }}
         >
-          {_.map(instagramPosts, ({ node }, i) => {
+          {_.map(instagramPosts, ({ url, src, title }, i) => {
             return (
               <SwiperSlide className='p-4' key={i}>
                 <a
-                  className='block overflow-hidden rounded-sm'
-                  href={`https://www.instagram.com/p/${node.shortcode}`}
+                  className='block overflow-hidden rounded-sm max-w-[100%] aspect-w-1 aspect-h-1'
+                  href={`https://www.instagram.com/p/${url}`}
                   target='_blank'
                   rel='noreferrer'
                 >
                   <img
                     className='object-cover lazy-img'
-                    data-src={node.thumbnail_src}
-                    alt={node.edge_media_to_caption.edges[0].node.text}
-                    width='1024'
-                    height='1024'
+                    data-src={src}
+                    alt={title}
                   />
                 </a>
               </SwiperSlide>
@@ -256,28 +267,71 @@ export async function getStaticProps(context) {
 
   const products = await client.product.fetchAll(50)
 
-  const instagramClient = new Instagram({
-    username: process.env.IG_USERNAME,
-    password: process.env.IG_PASSWORD,
-  })
-
-  let posts = []
+  let posts = [
+    {
+      title: '',
+      url: 'CNqiNNAHRaS',
+      src: '/img/172542170_885844758655781_5338761584260565207_n.jpg',
+    },
+    {
+      title: '',
+      url: 'CNILatcHw22',
+      src: '/img/167069742_448413056444823_4158873361955546940_n.jpg',
+    },
+    {
+      title: '',
+      url: 'CLMlpB1nDRJ',
+      src: '/img/149031237_424546605471121_7323582422367123677_n.jpg',
+    },
+    {
+      title: '',
+      url: 'CITlgzrHPvu',
+      src: '/img/129100307_126858045741802_2132416784646311528_n.jpg',
+    },
+    {
+      title: '',
+      url: 'CFJIHUZHOou',
+      src: '/img/119204178_2782535555325339_7673312928488229798_n.jpg',
+    },
+    {
+      title: '',
+      url: 'CFCm_Cln8rC',
+      src: '/img/119125418_758145701706270_3943952648340557262_n.jpg',
+    },
+    {
+      title: '',
+      url: 'CEx7nF_HY_K',
+      src: '/img/118882324_617993035543269_3131857677561567314_n.jpg',
+    },
+    {
+      title: '',
+      url: 'CEwgveWHk11',
+      src: '/img/118823390_241756107097586_7349958521107754135_n.jpg',
+    },
+    {
+      title: '',
+      url: 'CDwKh7FHuCO',
+      src: '/img/117174730_660897934512370_4601225435968257277_n.jpg',
+    },
+    {
+      title: '',
+      url: 'CDC51xAnCCa',
+      src: '/img/111888703_2627439514137261_3849288409074560967_n.jpg',
+    },
+  ]
   // TODO: Activate this before deploying
-  try {
-    await instagramClient.login()
-    const instagramData = await instagramClient.getPhotosByUsername({
-      username: process.env.IG_USERNAME,
-    })
+  // try {
+  //   await instagramClient.login()
+  //   const instagramData = await instagramClient.getPhotosByUsername({
+  //     username: process.env.IG_USERNAME,
+  //   })
 
-    if (
-      instagramData &&
-      instagramData.user.edge_owner_to_timeline_media.count > 0
-    ) {
-      posts = instagramData.user.edge_owner_to_timeline_media.edges
-    }
-  } catch (err) {
-    console.log('Something went wrong while logging into Instagram')
-  }
+  //   if (instagramData.user.edge_owner_to_timeline_media.count > 0) {
+  //     posts = instagramData.user.edge_owner_to_timeline_media.edges
+  //   }
+  // } catch (err) {
+  //   console.log('Something went wrong while logging into Instagram')
+  // }
 
   return {
     props: {
