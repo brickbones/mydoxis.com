@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { map } from 'lodash'
 import Link from 'next/link'
+import Cart from './cart'
 
 function HeaderLink({ href, name, locale, children }) {
   return (
@@ -47,18 +49,19 @@ function Submenu({ links, locale, children }) {
   )
 }
 
-export default function Header() {
+export default function Header({ helpers, checkout }) {
   const { asPath, locale } = useRouter()
+  const [menu, setMenu] = useState(false)
 
   return (
     <header className='md:w-20 md:h-screen'>
-      <div className='left-0 flex items-center justify-between px-5 bg-gradient-to-r from-gray-400 to-gray-200 md:flex-col md:h-screen md:z-50 md:bg-gradient-to-b md:w-20 md:px-0 md:py-5 md:fixed'>
+      <div className='fixed left-0 right-0 z-50 flex items-center justify-between w-screen px-5 py-3 bg-gradient-to-b from-[#F6581EFF] to-[#F6581E00] md:from-gray-400 md:to-gray-200 md:flex-col md:h-screen md:z-50 md:bg-gradient-to-b md:w-20 md:px-0 md:py-5'>
         <Link
           className='flex-1 py-3 md:flex-none md:py-0'
           href='/'
           locale={locale}
         >
-          <a>
+          <a className='flex-1'>
             <img
               className='h-16 chubu md:h-20'
               src={'/svg/chubu-full.svg'}
@@ -134,7 +137,8 @@ export default function Header() {
             />
           </HeaderLink>
         </ul>
-        <button className='block ml-4 md:ml-8 focus:outline-none md:hidden'>
+        <Cart helpers={helpers} checkout={checkout} />
+        <button className='block ml-4 text-white md:ml-8 focus:outline-none md:hidden'>
           <svg
             className='block fill-current w-7 h-7'
             xmlns='http://www.w3.org/2000/svg'

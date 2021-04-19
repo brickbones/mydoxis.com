@@ -2,7 +2,6 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Header from './header'
 import Footer from './footer'
-import Cart from './cart'
 
 export default function Layout({ children, helpers, checkout }) {
   const { locale, route } = useRouter()
@@ -52,13 +51,12 @@ export default function Layout({ children, helpers, checkout }) {
         />
       </Head>
       <div className='page-content md:flex'>
-        <Header />
+        <Header helpers={helpers} checkout={checkout} />
         <main className='min-w-0 md:flex-1'>
           {children}
           <Footer />
         </main>
       </div>
-      <Cart helpers={helpers} checkout={checkout} />
     </>
   )
 }

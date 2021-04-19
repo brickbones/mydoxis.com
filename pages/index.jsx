@@ -25,7 +25,6 @@ export default function Home({ instagramPosts, products, helpers }) {
           if (entry.isIntersecting) {
             const image = entry.target
             image.src = image.dataset.src
-            console.log('Showed the image', image)
             imageObserver.unobserve(image)
           }
         })
@@ -36,7 +35,8 @@ export default function Home({ instagramPosts, products, helpers }) {
           if (entry.isIntersecting) {
             const video = entry.target
             video.play()
-            console.log('Started the video', video)
+            video.autoplay = true
+            video.playsInline = true
             videoObserver.unobserve(video)
           }
         })
@@ -319,19 +319,6 @@ export async function getStaticProps(context) {
       src: '/img/111888703_2627439514137261_3849288409074560967_n.jpg',
     },
   ]
-  // TODO: Activate this before deploying
-  // try {
-  //   await instagramClient.login()
-  //   const instagramData = await instagramClient.getPhotosByUsername({
-  //     username: process.env.IG_USERNAME,
-  //   })
-
-  //   if (instagramData.user.edge_owner_to_timeline_media.count > 0) {
-  //     posts = instagramData.user.edge_owner_to_timeline_media.edges
-  //   }
-  // } catch (err) {
-  //   console.log('Something went wrong while logging into Instagram')
-  // }
 
   return {
     props: {
