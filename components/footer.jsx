@@ -7,8 +7,8 @@ export default function Footer() {
 
   return (
     <footer className='py-20 text-gray-300 bg-gray-500 md:py-20'>
-      <div className='container px-6 mx-auto text-2xl leading-relaxed md:px-20 md:flex md:justify-between'>
-        <div className='mb-10'>
+      <div className='container px-4 mx-auto text-2xl leading-relaxed md:px-20 md:flex md:justify-between flex-wrap'>
+        <div className='mb-2 md:w-1/2 lg:w-auto p-5'>
           <h4 className='py-1 mb-5 text-xl tracking-wider text-white uppercase border-b-2 border-orange-500 font-display'>
             {locale === 'en' ? 'About Us' : 'Acerca de'}
           </h4>
@@ -20,7 +20,7 @@ export default function Footer() {
             </Link>
           </p>
         </div>
-        <div className='mb-10'>
+        <div className='mb-2 md:w-1/2 lg:w-auto p-5'>
           <h4 className='py-1 mb-5 text-xl tracking-wider text-white uppercase border-b-2 border-orange-500 font-display'>
             {locale === 'en' ? 'Contact' : 'Contacto'}
           </h4>
@@ -28,7 +28,7 @@ export default function Footer() {
             <a href='tel:+13212992083'>(+1) 321 299 2083</a>
           </p>
         </div>
-        <div className='mb-10'>
+        <div className='mb-2 md:w-1/2 lg:w-auto p-5'>
           <h4 className='py-1 mb-5 text-xl tracking-wider text-white uppercase border-b-2 border-orange-500 font-display'>
             {locale === 'en' ? 'Address' : 'Dirección'}
           </h4>
@@ -40,7 +40,7 @@ export default function Footer() {
             USA
           </p>
         </div>
-        <div className='mb-10'>
+        <div className='mb-2 md:w-1/2 lg:w-auto p-5'>
           <h4 className='py-1 mb-5 text-xl tracking-wider text-white uppercase border-b-2 border-orange-500 font-display'>
             {locale === 'en' ? 'Social Media' : 'Redes Sociales'}
           </h4>

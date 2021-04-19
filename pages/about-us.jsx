@@ -9,7 +9,7 @@ export default function AboutUs({ helpers }) {
   return (
     <Layout helpers={helpers}>
       <section className='pb-32 text-right bg-gradient-to-r from-gray-200 to-gray-300'>
-        <h1 className='px-10 py-4 mb-10 text-4xl text-orange-900 uppercase bg-orange-500 md:inline-block md:my-20 font-display'>
+        <h1 className='px-10 py-4 mb-10 text-3xl md:text-4xl text-orange-900 uppercase bg-orange-500 md:inline-block md:my-20 font-display text-center'>
           {locale === 'en' ? 'What is DOXIS?' : '¿Qué es DOXIS?'}
         </h1>
         <div className='container px-6 pb-10 mx-auto text-left md:px-20'>
@@ -29,7 +29,7 @@ export default function AboutUs({ helpers }) {
               : 'DOXIS nació en 2012 en algún lugar de Puerto Rico, Estados Unidos y en algún lugar de Medellín, Colombia cuando Jowell & Randy, el dúo puertorriqueño que cambió todo para bien en la música reggaeton, se unió a los diseñadores de moda, estilistas y empresarios Michael Clements & Paula Sánchez, ambos Trabajé antes para la primera marca exitosa de ropa de reggaetón "AKOLATRONIC" y tuve trabajo con DJ NELSON en otro proyecto llamado "Angels" para Wisin & Yandel.'}
           </p>
           <div className='mb-20 md:flex md:justify-between max-w-prose'>
-            <div className='flex-1'>
+            <div className='mb-5 flex-1'>
               <h4 className='mb-5 text-lg font-bold'>
                 {locale === 'en' ? 'Products' : 'Productos'}
               </h4>
@@ -43,7 +43,7 @@ export default function AboutUs({ helpers }) {
                 DOXIS @mydoxis
               </p>
             </div>
-            <div className='flex-1'>
+            <div className='mb-5 flex-1'>
               <h4 className='mb-5 text-lg font-bold'>
                 {locale === 'en' ? 'Address' : 'Dirección'}
               </h4>

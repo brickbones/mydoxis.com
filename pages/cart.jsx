@@ -20,7 +20,7 @@ export default function Cart({ helpers, checkout }) {
   return (
     <Layout helpers={helpers}>
       <section className='pb-32 bg-gradient-to-r from-gray-200 to-gray-300'>
-        <h1 className='px-10 py-4 mb-10 text-4xl text-orange-900 uppercase bg-orange-500 md:mb-20 font-display'>
+        <h1 className='px-10 py-4 mb-10 text-4xl text-center text-orange-900 uppercase bg-orange-500 md:mb-20 font-display'>
           {locale === 'en' ? 'Cart' : 'Carrito'}
         </h1>
         <div className='container px-6 pb-10 mx-auto md:px-20'>
@@ -45,7 +45,7 @@ export default function Cart({ helpers, checkout }) {
                           />
                         </div>
                       </div>
-                      <p className='flex-1 px-2 md:px-'>
+                      <p className='flex-1 px-2'>
                         {item.title}
                         <span className='ml-2 text-gray-500 md:ml-5'>{`x ${item.quantity}`}</span>
                       </p>
@@ -69,7 +69,7 @@ export default function Cart({ helpers, checkout }) {
                   )
                 })}
               </ul>
-              <div className='items-center text-right md:flex'>
+              <div className='items-center text-center sm:text-right md:flex'>
                 <div className='flex-1 mb-5 text-xl text-gray-600 md:px-10 md:mb-0'>
                   {locale === 'en' ? 'Summary:' : 'Resumen:'}{' '}
                   {locale === 'en'
@@ -79,7 +79,7 @@ export default function Cart({ helpers, checkout }) {
                     : count > 1
                     ? `${count} productos`
                     : `${count} producto`}{' '}
-                  &middot;{' '}
+                  &middot; <br className='sm:hidden' />
                   <span className='font-bold'>
                     {locale === 'en' ? 'Total:' : 'Valor total:'}{' '}
                     {checkout.totalPriceV2.currencyCode}{' '}

@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 function HeaderLink({ href, name, locale, children }) {
   return (
-    <li className='relative px-12 py-5 text-xs font-bold tracking-widest text-gray-900 uppercase whitespace-nowrap'>
+    <li className='relative block px-8 py-5 text-xs font-bold tracking-widest text-gray-900 uppercase whitespace-nowrap'>
       {href ? (
         <Link href={href} locale={locale}>
           <a>{locale === 'en' ? name.en : name.es}</a>
@@ -25,7 +25,7 @@ function Submenu({ links, locale, children }) {
       {map(links, (link, key) => {
         return link.external ? (
           <li
-            className='block px-10 py-3 whitespace-nowrap hover:bg-white hover:bg-opacity-10'
+            className='block px-10 py-3 whitespace-nowrap md:hover:bg-white md:hover:bg-opacity-10'
             key={key}
           >
             <a href={link.href} target='_blank' rel='noreferrer'>
@@ -34,7 +34,7 @@ function Submenu({ links, locale, children }) {
           </li>
         ) : (
           <li
-            className='block px-10 py-3 whitespace-nowrap hover:bg-white hover:bg-opacity-10'
+            className='block px-10 py-3 whitespace-nowrap md:hover:bg-white md:hover:bg-opacity-10'
             key={key}
           >
             <Link href={link.href} locale={locale}>

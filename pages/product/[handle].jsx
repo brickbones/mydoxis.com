@@ -70,8 +70,8 @@ export default function Product({ product, helpers }) {
 
   return (
     <Layout helpers={helpers}>
-      <section className='md:flex'>
-        <div className='overflow-hidden md:h-screen md:w-1/2'>
+      <section className='lg:flex'>
+        <div className='overflow-hidden md:h-screen lg:w-1/2'>
           <Swiper
             pagination={{ clickable: true }}
             autoplay={{
@@ -95,7 +95,7 @@ export default function Product({ product, helpers }) {
           </Swiper>
         </div>
 
-        <div className='relative justify-center md:w-1/2 md:flex md:flex-col bg-gradient-to-r from-gray-200 to-gray-300'>
+        <div className='relative justify-center lg:w-1/2 lg:flex lg:flex-col bg-gradient-to-r from-gray-200 to-gray-300'>
           <div className='text-lg text-right'>
             {!product.availableForSale && (
               <span className='inline-block px-6 py-2 mt-10 text-xl tracking-wide text-gray-300 uppercase bg-gray-500 md:right-0 md:absolute md:top-20 font-display'>

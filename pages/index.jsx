@@ -12,13 +12,27 @@ import Link from 'next/link'
 export default function Home({ instagramPosts, products, helpers }) {
   const { locale } = useRouter()
 
-  useEffect(
-    () =>
-      _.forEach(document.querySelectorAll('.video-bg'), (video) => {
-        video.play()
-      }),
-    []
-  )
+  useEffect(() => {
+    _.forEach(document.querySelectorAll('.video-bg'), (video) => {
+      video.play()
+    })
+
+    const images = Array.from(document.querySelectorAll('.lazy-img'))
+
+    if ('IntersectionObserver' in window) {
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const image = entry.target
+            image.src = image.dataset.src
+            imageObserver.unobserve(image)
+          }
+        })
+      })
+
+      images.forEach((img) => imageObserver.observe(img))
+    }
+  }, [])
 
   SwiperCore.use([Autoplay, Pagination])
 
@@ -82,16 +96,16 @@ export default function Home({ instagramPosts, products, helpers }) {
       </section>
 
       <section className='pb-32 text-right bg-gradient-to-r from-gray-200 to-gray-300'>
-        <h1 className='px-10 py-4 mb-10 text-4xl text-orange-900 uppercase bg-orange-500 md:inline-block md:my-20 font-display'>
+        <h1 className='px-10 py-4 mb-10 text-4xl text-center text-orange-900 uppercase bg-orange-500 md:inline-block md:my-20 font-display'>
           {locale === 'en' ? 'Fresh & New' : 'Nuevos Productos'}
         </h1>
         <div className='container px-6 pb-10 mx-auto text-left md:px-20'>
-          <div className='grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-4'>
+          <div className='grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-2 lg:md:grid-cols-4'>
             {_.map(products.slice(0, 8), (product) => {
               return (
                 <figure
                   key={product.id}
-                  className={`transition transform bg-gray-100 border border-gray-900 card hover:scale-110`}
+                  className={`transition transform bg-gray-100 border border-gray-900 card md:hover:scale-110`}
                 >
                   <Link href={`/product/${product.handle}/`} locale={locale}>
                     <a>
@@ -116,7 +130,7 @@ export default function Home({ instagramPosts, products, helpers }) {
       </section>
 
       <section className='pb-32 overflow-hidden text-right'>
-        <h1 className='px-10 py-4 mb-10 text-4xl text-orange-900 uppercase bg-orange-500 md:inline-block md:my-20 font-display'>
+        <h1 className='px-10 py-4 mb-10 text-4xl text-center text-orange-900 uppercase bg-orange-500 md:inline-block md:my-20 font-display'>
           {locale === 'en'
             ? 'A new era in urban fashion'
             : 'Nueva era en la moda urbana'}
@@ -134,6 +148,7 @@ export default function Home({ instagramPosts, products, helpers }) {
                 width='560'
                 height='315'
                 src='https://www.youtube-nocookie.com/embed/WcF8A9s3ldA?controls=0'
+                srcDoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube-nocookie.com/embed/WcF8A9s3ldA?controls=0&autoplay=1><img src=https://img.youtube.com/vi/WcF8A9s3ldA/hqdefault.jpg alt='Jowell y Randy x J Balvin - Anaranjado'><span>&#x25BA;</span></a>"
                 frameBorder='0'
                 allowFullScreen
               />
@@ -154,6 +169,7 @@ export default function Home({ instagramPosts, products, helpers }) {
                 width='560'
                 height='315'
                 src='https://www.youtube-nocookie.com/embed/81GgDM-MdBA?controls=0'
+                srcDoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube-nocookie.com/embed/81GgDM-MdBA?controls=0&autoplay=1><img src=https://img.youtube.com/vi/81GgDM-MdBA/hqdefault.jpg alt='Jowell y Randy - Perriando'><span>&#x25BA;</span></a>"
                 frameBorder='0'
                 allowFullScreen
               />
@@ -166,6 +182,7 @@ export default function Home({ instagramPosts, products, helpers }) {
                 width='560'
                 height='315'
                 src='https://www.youtube-nocookie.com/embed/EwLYDWew1rk?controls=0'
+                srcDoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube-nocookie.com/embed/EwLYDWew1rk?controls=0&autoplay=1><img src=https://img.youtube.com/vi/EwLYDWew1rk/hqdefault.jpg alt='Jowell y Randy, Kiko El Crazy - Se Acabó La Cuarentena'><span>&#x25BA;</span></a>"
                 frameBorder='0'
                 allowFullScreen
               />
@@ -180,9 +197,9 @@ export default function Home({ instagramPosts, products, helpers }) {
           target='_blank'
           rel='noreferrer'
         >
-          <h1 className='flex items-center px-10 py-4 mb-10 text-4xl text-orange-900 uppercase bg-orange-500 fill-current md:inline-flex md:my-20 font-display'>
+          <h1 className='items-center px-10 py-4 mb-10 text-4xl text-center text-orange-900 uppercase bg-orange-500 fill-current sm:flex md:inline-flex md:my-20 font-display'>
             <svg
-              className='mr-3'
+              className='hidden mr-3 sm:inline-block'
               xmlns='http://www.w3.org/2000/svg'
               width='32'
               height='32'
@@ -214,9 +231,9 @@ export default function Home({ instagramPosts, products, helpers }) {
                   target='_blank'
                   rel='noreferrer'
                 >
-                  <Image
-                    className='object-cover'
-                    src={node.thumbnail_src}
+                  <img
+                    className='object-cover lazy-img'
+                    data-src={node.thumbnail_src}
                     alt={node.edge_media_to_caption.edges[0].node.text}
                     width='1024'
                     height='1024'
@@ -252,7 +269,10 @@ export async function getStaticProps(context) {
       username: process.env.IG_USERNAME,
     })
 
-    if (instagramData.user.edge_owner_to_timeline_media.count > 0) {
+    if (
+      instagramData &&
+      instagramData.user.edge_owner_to_timeline_media.count > 0
+    ) {
       posts = instagramData.user.edge_owner_to_timeline_media.edges
     }
   } catch (err) {

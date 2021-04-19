@@ -36,7 +36,7 @@ export default function Collection({ collection, helpers }) {
           </p>
           <div className='my-10'>
             <button
-              className={`px-2 py-1 text-xs font-bold tracking-wider uppercase  rounded whitespace-nowrap m-1 cursor-pointer ${
+              className={`px-2 py-1 text-xs font-bold tracking-wider uppercase rounded whitespace-nowrap m-1 cursor-pointer ${
                 state === '*'
                   ? 'bg-orange-400 text-orange-900'
                   : 'bg-gray-400 text-gray-200'
@@ -63,12 +63,12 @@ export default function Collection({ collection, helpers }) {
               )
             })}
           </div>
-          <div className='grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-4'>
+          <div className='grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4'>
             {_.map(collection.products, (product) => {
               return (
                 <figure
                   key={product.id}
-                  className={`transition transform bg-gray-100 border border-gray-900 card hover:scale-110 ${
+                  className={`transition transform bg-gray-100 border border-gray-900 card md:hover:scale-110 ${
                     state === '*' || state === product.productType.toLowerCase()
                       ? 'block'
                       : 'hidden'
@@ -106,7 +106,7 @@ export default function Collection({ collection, helpers }) {
                   ) => (
                     <figure
                       key={id}
-                      className='transition transform bg-gray-100 border border-gray-900 card hover:scale-110'
+                      className='transition transform bg-gray-100 border border-gray-900 card md:hover:scale-110'
                       data-speed={i - 1.5}
                     >
                       <Link to={`/product/${handle}/`}>
