@@ -87,7 +87,7 @@ export default function Product({ product, helpers }) {
                     src={src}
                     alt={altText}
                     layout='fill'
-                    quality='100'
+                    quality='85'
                   />
                 </div>
               </SwiperSlide>

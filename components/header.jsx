@@ -134,7 +134,10 @@ export default function Header({ helpers, checkout }) {
           </HeaderLink>
         </ul>
         <Cart helpers={helpers} checkout={checkout} />
-        <button className='block ml-4 text-white md:ml-8 focus:outline-none md:hidden'>
+        <button
+          className='block ml-4 text-white md:ml-8 focus:outline-none md:hidden'
+          onClick={() => setMenu(!menu)}
+        >
           <svg
             className='block fill-current w-7 h-7'
             xmlns='http://www.w3.org/2000/svg'
@@ -162,6 +165,107 @@ export default function Header({ helpers, checkout }) {
             </a>
           </Link>
         </div>
+      </div>
+      <div
+        className={`fixed z-10 w-screen h-screen bg-gray-400 items-center justify-center text-3xl leading-relaxed font-bold ${
+          menu ? 'flex' : 'hidden'
+        }`}
+      >
+        <ul>
+          <li>
+            <Link href='/' locale={locale}>
+              <span className='border-b-4 border-orange'>
+                {locale === 'en' ? 'Home' : 'Inicio'}
+              </span>
+            </Link>
+          </li>
+          <li>
+            <span className='border-b-4 border-orange'>
+              {locale === 'en' ? 'Collections' : 'Colecciones'}
+            </span>
+            <ul className='m-5 text-xl font-normal'>
+              <li>
+                <Link href='/collection/doxis' locale={locale}>
+                  DOXIS
+                </Link>
+              </li>
+              <li>
+                <Link href='/collection/juanfran' locale={locale}>
+                  Juanfran
+                </Link>
+              </li>
+              <li>
+                <Link href='/collection/leyvan' locale={locale}>
+                  Leyvan
+                </Link>
+              </li>
+              <li>
+                <Link href='/collection/victor-perez' locale={locale}>
+                  Victor Perez
+                </Link>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <Link href='/college-jackets' locale={locale}>
+              <span className='border-b-4 border-orange'>
+                {locale === 'en' ? 'Jackets' : 'Chaquetas'}
+              </span>
+            </Link>
+          </li>
+          <li>
+            <span className='border-b-4 border-orange'>
+              {locale === 'en' ? 'Follow Us' : 'Síguenos'}
+            </span>
+            <ul className='m-5 text-xl font-normal'>
+              <li>
+                <a
+                  href='https://www.instagram.com/mydoxis/'
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  Instagram
+                </a>
+              </li>
+              <li>
+                <a
+                  href='https://www.facebook.com/mydoxis'
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  Facebook
+                </a>
+              </li>
+              <li>
+                <a
+                  href='https://www.tiktok.com/@mydoxis'
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  TikTok
+                </a>
+              </li>
+              <li>
+                <a
+                  href='https://www.youtube.com/channel/UC8bNl1aauU6J9OZgqaUMqbw'
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  YouTube
+                </a>
+              </li>
+              <li>
+                <a
+                  href='https://open.spotify.com/artist/4IMAo2UQchVFyPH24PAjUs'
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  Spotify
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </div>
     </header>
   )

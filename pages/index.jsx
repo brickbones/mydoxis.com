@@ -10,25 +10,6 @@ import Link from 'next/link'
 
 export default function Home({ instagramPosts, products, helpers }) {
   const { locale } = useRouter()
-
-  useEffect(() => {
-    const images = Array.from(document.querySelectorAll('.lazy-img'))
-
-    if ('IntersectionObserver' in window) {
-      const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const image = entry.target
-            image.src = image.dataset.src
-            imageObserver.unobserve(image)
-          }
-        })
-      })
-
-      images.forEach((img) => imageObserver.observe(img))
-    }
-  }, [])
-
   SwiperCore.use([Autoplay, Pagination])
 
   return (
@@ -44,12 +25,17 @@ export default function Home({ instagramPosts, products, helpers }) {
           <SwiperSlide>
             <div className='relative flex items-center justify-center h-screen px-10 py-32 bg-gradient-to-t from-[#F6581E88] via-[#F6581E00] to-[#F6581E00]'>
               <img
-                className='absolute w-3/5 logo'
+                className='absolute hidden w-3/5 md:block logo'
                 src='/svg/doxis-full.svg'
                 alt='Logo DOXIS'
               />
               <img
-                className='absolute w-1/3 symbol'
+                className='absolute block w-3/5 p-8 md:p-0 md:hidden logo'
+                src='/svg/doxis-letter.svg'
+                alt='Logo DOXIS'
+              />
+              <img
+                className='absolute w-full p-10 md:p-0 md:w-1/3 symbol'
                 src='/svg/doxis.svg'
                 alt='Symbol DOXIS'
               />
@@ -72,7 +58,7 @@ export default function Home({ instagramPosts, products, helpers }) {
                 className='object-cover z-[-1]'
                 src='/img/banner-collection.jpg'
                 layout='fill'
-                quality='100'
+                quality='85'
               />
             </div>
           </SwiperSlide>
@@ -147,7 +133,6 @@ export default function Home({ instagramPosts, products, helpers }) {
                 width='560'
                 height='315'
                 src='https://www.youtube-nocookie.com/embed/WcF8A9s3ldA?controls=0'
-                srcDoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube-nocookie.com/embed/WcF8A9s3ldA?controls=0&autoplay=1><img src=https://img.youtube.com/vi/WcF8A9s3ldA/hqdefault.jpg alt='Jowell y Randy x J Balvin - Anaranjado'><span>&#x25BA;</span></a>"
                 frameBorder='0'
                 allowFullScreen
               />
@@ -168,7 +153,6 @@ export default function Home({ instagramPosts, products, helpers }) {
                 width='560'
                 height='315'
                 src='https://www.youtube-nocookie.com/embed/81GgDM-MdBA?controls=0'
-                srcDoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube-nocookie.com/embed/81GgDM-MdBA?controls=0&autoplay=1><img src=https://img.youtube.com/vi/81GgDM-MdBA/hqdefault.jpg alt='Jowell y Randy - Perriando'><span>&#x25BA;</span></a>"
                 frameBorder='0'
                 allowFullScreen
               />
@@ -181,7 +165,6 @@ export default function Home({ instagramPosts, products, helpers }) {
                 width='560'
                 height='315'
                 src='https://www.youtube-nocookie.com/embed/EwLYDWew1rk?controls=0'
-                srcDoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube-nocookie.com/embed/EwLYDWew1rk?controls=0&autoplay=1><img src=https://img.youtube.com/vi/EwLYDWew1rk/hqdefault.jpg alt='Jowell y Randy, Kiko El Crazy - Se Acabó La Cuarentena'><span>&#x25BA;</span></a>"
                 frameBorder='0'
                 allowFullScreen
               />
@@ -230,10 +213,11 @@ export default function Home({ instagramPosts, products, helpers }) {
                   target='_blank'
                   rel='noreferrer'
                 >
-                  <img
-                    className='object-cover lazy-img'
-                    data-src={src}
-                    alt={title}
+                  <Image
+                    className='object-cover'
+                    src={src}
+                    alt='Instagram image from @mydoxis'
+                    layout='fill'
                   />
                 </a>
               </SwiperSlide>
@@ -255,52 +239,42 @@ export async function getStaticProps(context) {
 
   let posts = [
     {
-      title: '',
       url: 'CNqiNNAHRaS',
       src: '/img/172542170_885844758655781_5338761584260565207_n.jpg',
     },
     {
-      title: '',
       url: 'CNILatcHw22',
       src: '/img/167069742_448413056444823_4158873361955546940_n.jpg',
     },
     {
-      title: '',
       url: 'CLMlpB1nDRJ',
       src: '/img/149031237_424546605471121_7323582422367123677_n.jpg',
     },
     {
-      title: '',
       url: 'CITlgzrHPvu',
       src: '/img/129100307_126858045741802_2132416784646311528_n.jpg',
     },
     {
-      title: '',
       url: 'CFJIHUZHOou',
       src: '/img/119204178_2782535555325339_7673312928488229798_n.jpg',
     },
     {
-      title: '',
       url: 'CFCm_Cln8rC',
       src: '/img/119125418_758145701706270_3943952648340557262_n.jpg',
     },
     {
-      title: '',
       url: 'CEx7nF_HY_K',
       src: '/img/118882324_617993035543269_3131857677561567314_n.jpg',
     },
     {
-      title: '',
       url: 'CEwgveWHk11',
       src: '/img/118823390_241756107097586_7349958521107754135_n.jpg',
     },
     {
-      title: '',
       url: 'CDwKh7FHuCO',
       src: '/img/117174730_660897934512370_4601225435968257277_n.jpg',
     },
     {
-      title: '',
       url: 'CDC51xAnCCa',
       src: '/img/111888703_2627439514137261_3849288409074560967_n.jpg',
     },
