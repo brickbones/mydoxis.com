@@ -34,35 +34,37 @@ export default function Collection({ collection, helpers }) {
           <p className='mb-20 text-gray-900 max-w-prose md:text-xl dark:text-gray-400'>
             {collection.description}
           </p>
-          <div className='my-10'>
-            <button
-              className={`px-2 py-1 text-xs font-bold tracking-wider uppercase rounded whitespace-nowrap m-1 cursor-pointer ${
-                state === '*'
-                  ? 'bg-orange-400 text-orange-900'
-                  : 'bg-gray-400 text-gray-200'
-              }`}
-              data-filter='*'
-              onClick={() => setState('*')}
-            >
-              {locale === 'en' ? 'View All' : 'Ver Todo'}
-            </button>
-            {_.map(filters, (filter, key) => {
-              return (
-                <button
-                  key={key}
-                  className={`px-2 py-1 text-xs font-bold tracking-wider uppercase  rounded whitespace-nowrap m-1 cursor-pointer ${
-                    state === filter
-                      ? 'bg-orange-400 text-orange-900'
-                      : 'bg-gray-400 text-gray-200'
-                  }`}
-                  data-filter={filter}
-                  onClick={() => setState(filter)}
-                >
-                  {filter}
-                </button>
-              )
-            })}
-          </div>
+          {filters.length > 0 && (
+            <div className='my-10'>
+              <button
+                className={`px-2 py-1 text-sm md:text-xs font-bold tracking-wider uppercase rounded whitespace-nowrap m-1 cursor-pointer ${
+                  state === '*'
+                    ? 'bg-orange-400 text-orange-900'
+                    : 'bg-gray-400 text-gray-200'
+                }`}
+                data-filter='*'
+                onClick={() => setState('*')}
+              >
+                {locale === 'en' ? 'View All' : 'Ver Todo'}
+              </button>
+              {_.map(filters, (filter, key) => {
+                return (
+                  <button
+                    key={key}
+                    className={`px-2 py-1 text-sm md:text-xs font-bold tracking-wider uppercase  rounded whitespace-nowrap m-1 cursor-pointer ${
+                      state === filter
+                        ? 'bg-orange-400 text-orange-900'
+                        : 'bg-gray-400 text-gray-200'
+                    }`}
+                    data-filter={filter}
+                    onClick={() => setState(filter)}
+                  >
+                    {filter}
+                  </button>
+                )
+              })}
+            </div>
+          )}
           <div className='grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4'>
             {_.map(collection.products, (product) => {
               return (
@@ -92,40 +94,6 @@ export default function Collection({ collection, helpers }) {
                 </figure>
               )
             })}
-            {/* {allShopifyProduct.edges.map(
-                  (
-                    {
-                      node: {
-                        id,
-                        handle,
-                        title,
-                        images: [firstImage]
-                      }
-                    },
-                    i
-                  ) => (
-                    <figure
-                      key={id}
-                      className='transition transform bg-gray-100 border border-gray-900 card md:hover:scale-110'
-                      data-speed={i - 1.5}
-                    >
-                      <Link to={`/product/${handle}/`}>
-                        {firstImage && firstImage.localFile && (
-                          <Img
-                            fluid={{
-                              ...firstImage.localFile.childImageSharp.fluid,
-                              aspectRatio: 2 / 3
-                            }}
-                            alt={handle}
-                          />
-                        )}
-                      </Link>
-                      <figcaption className='px-4 py-2 text-xs font-bold tracking-wider text-center text-gray-500 uppercase'>
-                        {title}
-                      </figcaption>
-                    </figure>
-                  )
-                )} */}
           </div>
         </div>
       </section>

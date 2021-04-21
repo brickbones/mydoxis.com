@@ -54,19 +54,19 @@ export default function Header({ helpers, checkout }) {
   const [menu, setMenu] = useState(false)
 
   return (
-    <header className='md:w-20 md:h-screen'>
-      <div className='fixed left-0 right-0 z-50 flex items-center justify-between w-screen px-5 py-3 bg-gradient-to-b from-[#F6581E88] to-[#F6581E00] md:from-gray-400 md:to-gray-200 md:flex-col md:h-screen md:z-50 md:bg-gradient-to-b md:w-20 md:px-0 md:py-5'>
+    <header className='lg:w-20 lg:h-screen'>
+      <div className='fixed left-0 right-0 z-50 flex items-center justify-between w-screen px-5 py-3 bg-gradient-to-b from-[#F6581E88] to-[#F6581E00] lg:from-gray-400 lg:to-gray-200 lg:flex-col lg:h-screen lg:z-50 lg:bg-gradient-to-b lg:w-20 lg:px-0 lg:py-5'>
         <Link href='/' locale={locale}>
-          <a className='flex-1 py-3 md:flex-none md:py-0'>
+          <a className='flex-1 py-3 lg:flex-none lg:py-0'>
             <img
-              className='h-16 chubu md:h-20'
+              className='h-16 chubu lg:h-20'
               src={'/svg/chubu-full.svg'}
               alt='Chubu DOXIS'
             />
           </a>
         </Link>
         <ul
-          className='hidden p-0 m-0 list-none md:flex md:transform md:rotate-180'
+          className='hidden p-0 m-0 list-none lg:flex lg:transform lg:rotate-180'
           style={{ writingMode: 'vertical-rl' }}
         >
           <HeaderLink
@@ -133,24 +133,42 @@ export default function Header({ helpers, checkout }) {
             />
           </HeaderLink>
         </ul>
-        <Cart helpers={helpers} checkout={checkout} />
+        <Cart helpers={helpers} checkout={checkout} menu={menu} />
         <button
-          className='block ml-4 text-white md:ml-8 focus:outline-none md:hidden'
+          className={`block ml-4 ${
+            menu ? 'text-gray-800' : 'text-white'
+          } lg:ml-8 focus:outline-none lg:hidden`}
           onClick={() => setMenu(!menu)}
         >
-          <svg
-            className='block fill-current w-7 h-7'
-            xmlns='http://www.w3.org/2000/svg'
-            width='24'
-            height='24'
-            viewBox='0 0 24 24'
-          >
-            <path d='M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z' />
-          </svg>
+          {menu ? (
+            <svg
+              className='block fill-current w-7 h-7'
+              xmlns='http://www.w3.org/2000/svg'
+              width='24'
+              height='24'
+              viewBox='0 0 24 24'
+            >
+              <path d='M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z' />
+            </svg>
+          ) : (
+            <svg
+              className='block fill-current w-7 h-7'
+              xmlns='http://www.w3.org/2000/svg'
+              width='24'
+              height='24'
+              viewBox='0 0 24 24'
+            >
+              <path d='M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z' />
+            </svg>
+          )}
         </button>
-        <div className='hidden text-xl md:block'>
+        <div
+          className={`${
+            menu ? 'fixed' : 'hidden'
+          } text-3xl bottom-5 left-5 md:text-xl lg:block`}
+        >
           <Link href={asPath} locale='en'>
-            <a>
+            <a onClick={() => setMenu(false)}>
               <span role='img' aria-label='English'>
                 &#127482;&#127480;
               </span>
@@ -158,7 +176,7 @@ export default function Header({ helpers, checkout }) {
           </Link>
           <br />
           <Link href={asPath} locale='es'>
-            <a>
+            <a onClick={() => setMenu(false)}>
               <span role='img' aria-label='Español'>
                 &#127466;&#127480;
               </span>
@@ -167,57 +185,61 @@ export default function Header({ helpers, checkout }) {
         </div>
       </div>
       <div
-        className={`fixed z-10 w-screen h-screen bg-gray-400 items-center justify-center text-3xl leading-relaxed font-bold ${
+        className={`fixed z-10 w-screen h-screen bg-gradient-to-r from-gray-400 to-gray-300 items-center justify-center text-3xl sm:text-2xl md:text-3xl leading-relaxed font-bold ${
           menu ? 'flex' : 'hidden'
         }`}
       >
-        <ul>
+        <ul className='flex flex-col sm:flex-row sm:gap-8 md:flex-col'>
           <li>
             <Link href='/' locale={locale}>
-              <span className='border-b-4 border-orange'>
-                {locale === 'en' ? 'Home' : 'Inicio'}
-              </span>
+              <a onClick={() => setMenu(false)}>
+                <span className='border-b-4 border-orange'>
+                  {locale === 'en' ? 'Home' : 'Inicio'}
+                </span>
+              </a>
             </Link>
           </li>
           <li>
             <span className='border-b-4 border-orange'>
               {locale === 'en' ? 'Collections' : 'Colecciones'}
             </span>
-            <ul className='m-5 text-xl font-normal'>
+            <ul className='my-5 text-2xl font-normal sm:text-xl md:text-2xl'>
               <li>
                 <Link href='/collection/doxis' locale={locale}>
-                  DOXIS
+                  <a onClick={() => setMenu(false)}>DOXIS</a>
                 </Link>
               </li>
               <li>
                 <Link href='/collection/juanfran' locale={locale}>
-                  Juanfran
+                  <a onClick={() => setMenu(false)}>Juanfran</a>
                 </Link>
               </li>
               <li>
                 <Link href='/collection/leyvan' locale={locale}>
-                  Leyvan
+                  <a onClick={() => setMenu(false)}>Leyvan</a>
                 </Link>
               </li>
               <li>
                 <Link href='/collection/victor-perez' locale={locale}>
-                  Victor Perez
+                  <a onClick={() => setMenu(false)}>Victor Perez</a>
                 </Link>
               </li>
             </ul>
           </li>
           <li>
             <Link href='/college-jackets' locale={locale}>
-              <span className='border-b-4 border-orange'>
-                {locale === 'en' ? 'Jackets' : 'Chaquetas'}
-              </span>
+              <a onClick={() => setMenu(false)}>
+                <span className='border-b-4 border-orange'>
+                  {locale === 'en' ? 'Jackets' : 'Chaquetas'}
+                </span>
+              </a>
             </Link>
           </li>
           <li>
             <span className='border-b-4 border-orange'>
               {locale === 'en' ? 'Follow Us' : 'Síguenos'}
             </span>
-            <ul className='m-5 text-xl font-normal'>
+            <ul className='my-5 text-2xl font-normal sm:text-xl md:text-2xl'>
               <li>
                 <a
                   href='https://www.instagram.com/mydoxis/'

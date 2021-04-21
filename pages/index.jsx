@@ -25,17 +25,17 @@ export default function Home({ instagramPosts, products, helpers }) {
           <SwiperSlide>
             <div className='relative flex items-center justify-center h-screen px-10 py-32 bg-gradient-to-t from-[#F6581E88] via-[#F6581E00] to-[#F6581E00]'>
               <img
-                className='absolute hidden w-3/5 md:block logo'
+                className='absolute hidden w-3/5 sm:block logo'
                 src='/svg/doxis-full.svg'
                 alt='Logo DOXIS'
               />
               <img
-                className='absolute block w-3/5 p-8 md:p-0 md:hidden logo'
+                className='absolute block w-3/5 p-8 sm:p-0 sm:hidden logo'
                 src='/svg/doxis-letter.svg'
                 alt='Logo DOXIS'
               />
               <img
-                className='absolute w-full p-10 md:p-0 md:w-1/3 symbol'
+                className='absolute w-full p-10 sm:p-0 sm:w-1/3 symbol'
                 src='/svg/doxis.svg'
                 alt='Symbol DOXIS'
               />
