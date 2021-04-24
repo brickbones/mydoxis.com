@@ -37,7 +37,7 @@ export default function Collection({ collection, helpers }) {
           {filters.length > 0 && (
             <div className='my-10'>
               <button
-                className={`px-2 py-1 text-sm md:text-xs tracking-wider uppercase rounded whitespace-nowrap m-1 cursor-pointer ${
+                className={`px-2 py-1 text-sm tracking-wider uppercase rounded whitespace-nowrap m-1 cursor-pointer ${
                   state === '*'
                     ? 'bg-orange-400 text-orange-900'
                     : 'bg-gray-400 text-gray-200'
@@ -51,7 +51,7 @@ export default function Collection({ collection, helpers }) {
                 return (
                   <button
                     key={key}
-                    className={`px-2 py-1 text-sm md:text-xs tracking-wider uppercase  rounded whitespace-nowrap m-1 cursor-pointer ${
+                    className={`px-2 py-1 text-sm tracking-wider uppercase  rounded whitespace-nowrap m-1 cursor-pointer ${
                       state === filter
                         ? 'bg-orange-400 text-orange-900'
                         : 'bg-gray-400 text-gray-200'
