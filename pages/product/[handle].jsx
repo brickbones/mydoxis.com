@@ -83,9 +83,9 @@ export default function Product({ product, helpers }) {
               <SwiperSlide key={id}>
                 <div className='h-screen'>
                   <Image
-                    className='object-cover'
                     src={src}
                     alt={altText}
+                    objectFit='cover'
                     layout='fill'
                     quality='85'
                   />

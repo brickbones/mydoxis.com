@@ -55,8 +55,9 @@ export default function Home({ instagramPosts, products, helpers }) {
           <SwiperSlide>
             <div className='relative flex items-center justify-center h-screen px-10 py-32 bg-[#11182722] bg-gradient-to-t from-[#F6581E88] via-[#F6581E00] to-[#F6581E00]'>
               <Image
-                className='object-cover z-[-1]'
+                className='z-[-1]'
                 src='/img/banner-collection.jpg'
+                objectFit='cover'
                 layout='fill'
                 quality='85'
               />
@@ -90,15 +91,15 @@ export default function Home({ instagramPosts, products, helpers }) {
               return (
                 <figure
                   key={product.id}
-                  className={`transition transform bg-gray-100 border border-gray-900 card md:hover:scale-110`}
+                  className={`transition transform bg-gray-100 card md:hover:scale-110`}
                 >
                   <Link href={`/product/${product.handle}/`} locale={locale}>
                     <a>
                       <div className='aspect-w-2 aspect-h-3'>
                         <Image
-                          className='object-cover'
                           src={product.images[0].src}
                           alt={product.handle}
+                          objectFit='cover'
                           layout='fill'
                         />
                       </div>
@@ -214,9 +215,9 @@ export default function Home({ instagramPosts, products, helpers }) {
                   rel='noreferrer'
                 >
                   <Image
-                    className='object-cover'
                     src={src}
                     alt='Instagram image from @mydoxis'
+                    objectFit='cover'
                     layout='fill'
                   />
                 </a>

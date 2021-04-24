@@ -36,9 +36,9 @@ export default function Cart({ helpers, checkout }) {
                       <div className='hidden md:block'>
                         <div className='w-20 h-20 p-2'>
                           <Image
-                            className='object-cover'
                             src={item.variant.image.src}
                             alt={item.title}
+                            objectFit='cover'
                             width='256'
                             height='256'
                             quality='35'

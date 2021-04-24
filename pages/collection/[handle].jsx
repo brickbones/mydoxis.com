@@ -20,7 +20,7 @@ export default function Collection({ collection, helpers }) {
     filters.push(product.productType.toLowerCase())
   })
 
-  filters = _.compact(_.uniq(filters.sort()))
+  filters = _.sortBy(_.compact(_.uniq(filters)))
 
   return (
     <Layout helpers={helpers}>
@@ -37,7 +37,7 @@ export default function Collection({ collection, helpers }) {
           {filters.length > 0 && (
             <div className='my-10'>
               <button
-                className={`px-2 py-1 text-sm md:text-xs font-bold tracking-wider uppercase rounded whitespace-nowrap m-1 cursor-pointer ${
+                className={`px-2 py-1 text-sm md:text-xs tracking-wider uppercase rounded whitespace-nowrap m-1 cursor-pointer ${
                   state === '*'
                     ? 'bg-orange-400 text-orange-900'
                     : 'bg-gray-400 text-gray-200'
@@ -51,7 +51,7 @@ export default function Collection({ collection, helpers }) {
                 return (
                   <button
                     key={key}
-                    className={`px-2 py-1 text-sm md:text-xs font-bold tracking-wider uppercase  rounded whitespace-nowrap m-1 cursor-pointer ${
+                    className={`px-2 py-1 text-sm md:text-xs tracking-wider uppercase  rounded whitespace-nowrap m-1 cursor-pointer ${
                       state === filter
                         ? 'bg-orange-400 text-orange-900'
                         : 'bg-gray-400 text-gray-200'
@@ -70,7 +70,7 @@ export default function Collection({ collection, helpers }) {
               return (
                 <figure
                   key={product.id}
-                  className={`transition transform bg-gray-100 border border-gray-900 card md:hover:scale-110 ${
+                  className={`transition transform bg-gray-100 card md:hover:scale-110 ${
                     state === '*' || state === product.productType.toLowerCase()
                       ? 'block'
                       : 'hidden'
@@ -80,9 +80,9 @@ export default function Collection({ collection, helpers }) {
                     <a>
                       <div className='aspect-w-2 aspect-h-3'>
                         <Image
-                          className='object-cover'
                           src={product.images[0].src}
                           alt={product.handle}
+                          objectFit='cover'
                           layout='fill'
                         />
                       </div>
