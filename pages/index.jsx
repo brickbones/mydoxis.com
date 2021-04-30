@@ -240,7 +240,23 @@ export async function getStaticProps(context) {
     storefrontAccessToken: process.env.NEXT_PUBLIC_ACCESS_TOKEN,
   })
 
-  const products = await client.product.fetchAll(50)
+  // const products = await client.product.fetchAll(100)
+  const collections = await client.collection.fetchAllWithProducts()
+  const collectionId = _.find(collections, {
+    handle: 'doxis',
+  }).id
+
+  let {
+    handle,
+    description,
+    descriptionHtml,
+    id,
+    image,
+    title,
+    products,
+  } = await client.collection.fetchWithProducts(collectionId, {
+    productsFirst: 100,
+  })
 
   let posts = [
     {

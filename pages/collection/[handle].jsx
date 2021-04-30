@@ -140,7 +140,7 @@ export async function getStaticProps({ params }) {
     title,
     products,
   } = await client.collection.fetchWithProducts(collectionId, {
-    productsFirst: 50,
+    productsFirst: 100,
   })
 
   if (!image) image = { src: '' }

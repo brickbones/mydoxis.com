@@ -179,7 +179,7 @@ export default function Product({ product, helpers }) {
 
 export async function getStaticPaths({ locales }) {
   let paths = []
-  const products = await client.product.fetchAll(50)
+  const products = await client.product.fetchAll(100)
 
   _.forEach(locales, (locale) => {
     _.forEach(products, (product) => {
