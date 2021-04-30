@@ -31,9 +31,13 @@ export default function Collection({ collection, helpers }) {
             : `Colección ${collection.title}`}
         </h1>
         <div className='container px-6 pb-10 mx-auto text-left md:px-20'>
-          <p className='mb-20 text-gray-900 max-w-prose md:text-xl dark:text-gray-400'>
-            {collection.description}
-          </p>
+          {/* {collection.image && <img src={collection.image.src} />} */}
+          <div
+            className='mb-20 text-gray-900 md:text-lg dark:text-gray-400'
+            dangerouslySetInnerHTML={{
+              __html: collection.descriptionHtml,
+            }}
+          ></div>
           {filters.length > 0 && (
             <div className='my-10'>
               <button
@@ -126,6 +130,7 @@ export async function getStaticProps({ params }) {
   const {
     handle,
     description,
+    descriptionHtml,
     id,
     title,
     products,
@@ -139,6 +144,7 @@ export async function getStaticProps({ params }) {
       collection: {
         handle,
         description,
+        descriptionHtml,
         id,
         title,
         products: _.sortBy(
@@ -159,6 +165,7 @@ export async function getStaticProps({ params }) {
               return {
                 availableForSale,
                 description,
+                descriptionHtml,
                 handle,
                 id,
                 images: images.map(({ altText, id, src }) => {
