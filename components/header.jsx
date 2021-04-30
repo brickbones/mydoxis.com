@@ -57,7 +57,10 @@ export default function Header({ helpers, checkout }) {
     <header className='lg:w-20 lg:h-screen'>
       <div className='fixed left-0 right-0 z-50 flex items-center justify-between w-screen px-5 py-3 bg-gradient-to-b from-[#F6581E88] to-[#F6581E00] lg:from-gray-400 lg:to-gray-200 lg:flex-col lg:h-screen lg:z-50 lg:bg-gradient-to-b lg:w-20 lg:px-0 lg:py-5'>
         <Link href='/' locale={locale}>
-          <a className='flex-1 py-3 lg:flex-none lg:py-0'>
+          <a
+            className='flex-1 py-3 lg:flex-none lg:py-0'
+            onClick={() => setMenu(false)}
+          >
             <img
               className='h-16 chubu lg:h-20'
               src={'/svg/chubu-full.svg'}
@@ -231,11 +234,20 @@ export default function Header({ helpers, checkout }) {
               </li>
             </ul>
           </li>
-          <li>
+          {/* <li>
             <Link href='/college-jackets' locale={locale}>
               <a onClick={() => setMenu(false)}>
                 <span className='border-b-4 border-orange'>
                   {locale === 'en' ? 'Jackets' : 'Chaquetas'}
+                </span>
+              </a>
+            </Link>
+          </li> */}
+          <li>
+            <Link href='/about-us' locale={locale}>
+              <a onClick={() => setMenu(false)}>
+                <span className='border-b-4 border-orange'>
+                  {locale === 'en' ? 'About Us' : 'Acerca de'}
                 </span>
               </a>
             </Link>

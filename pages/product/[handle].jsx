@@ -81,11 +81,20 @@ export default function Product({ product, helpers }) {
           >
             {product.images.map(({ id, src, altText }) => (
               <SwiperSlide key={id}>
-                <div className='h-screen'>
+                <div className='aspect-w-2 aspect-h-3 md:aspect-none md:h-screen'>
                   <Image
+                    className='filter blur-xl'
+                    style={{ willChange: 'transform' }}
                     src={src}
                     alt={altText}
                     objectFit='cover'
+                    layout='fill'
+                    quality='5'
+                  />
+                  <Image
+                    src={src}
+                    alt={altText}
+                    objectFit='contain'
                     layout='fill'
                     quality='85'
                   />
@@ -99,7 +108,7 @@ export default function Product({ product, helpers }) {
           <div className='text-lg text-right'>
             {!product.availableForSale && (
               <span className='inline-block px-6 py-2 mt-10 text-xl tracking-wide text-gray-300 uppercase bg-gray-500 md:right-0 md:absolute md:top-20 font-display'>
-                Out of stock
+                {locale === 'en' ? 'Out of stock' : 'Agotado'}
               </span>
             )}
             <div className='p-10 text-left md:p-20'>
@@ -108,8 +117,10 @@ export default function Product({ product, helpers }) {
                   {product.productType}
                 </span>
               )}
-              <h1 className='text-5xl font-bold'>{product.title}</h1>
-              <h4 className='mb-10 text-3xl font-bold text-gray-500'>{`${product.variants[0].priceV2.currencyCode} $${state.price}`}</h4>
+              <h1 className='text-4xl md:text-5xl font-bold'>
+                {product.title}
+              </h1>
+              <h4 className='mb-10 text-2xl md:text-3xl font-bold text-gray-500'>{`${product.variants[0].priceV2.currencyCode} $${state.price}`}</h4>
               {description && <p className='mb-10'>{description}</p>}
               <div className='flex flex-col text-base sm:items-end sm:flex-row'>
                 {_.map(product.options, ({ id, name, values }) => {
@@ -151,7 +162,7 @@ export default function Product({ product, helpers }) {
                   />
                 </label>
                 <button
-                  className='w-full m-1.5 flex-1 px-4 py-1.5 bg-orange-500 rounded whitespace-nowrap text-gray-50 font-bold disabled:bg-gray-400 disabled:text-gray-300'
+                  className='w-full m-1.5 mt-10 md:mt-0 flex-1 px-4 py-1.5 bg-orange-500 rounded whitespace-nowrap text-gray-50 font-bold disabled:bg-gray-400 disabled:text-gray-300'
                   disabled={!isVariantAvailable()}
                   onClick={handleClick}
                 >

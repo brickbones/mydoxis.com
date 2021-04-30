@@ -82,7 +82,7 @@ export default function Home({ instagramPosts, products, helpers }) {
       </section>
 
       <section className='pb-32 text-right bg-gradient-to-r from-gray-200 to-gray-300'>
-        <h1 className='px-10 py-4 mb-10 text-4xl text-center text-orange-900 uppercase bg-orange-500 md:inline-block md:my-20 font-display'>
+        <h1 className='px-10 py-4 mb-10 text-3xl md:text-4xl text-center text-orange-900 uppercase bg-orange-500 md:inline-block md:my-20 font-display'>
           {locale === 'en' ? 'Fresh & New' : 'Nuevos Productos'}
         </h1>
         <div className='container px-6 pb-10 mx-auto text-left md:px-20'>
@@ -105,7 +105,7 @@ export default function Home({ instagramPosts, products, helpers }) {
                       </div>
                     </a>
                   </Link>
-                  <figcaption className='px-4 py-2 text-xs font-bold tracking-wider text-center text-gray-500 uppercase'>
+                  <figcaption className='px-4 py-2 text-base md:text-xs font-bold tracking-wider text-center text-gray-500 uppercase'>
                     {product.title}
                   </figcaption>
                 </figure>
@@ -116,13 +116,13 @@ export default function Home({ instagramPosts, products, helpers }) {
       </section>
 
       <section className='pb-32 overflow-hidden text-right'>
-        <h1 className='px-10 py-4 mb-10 text-4xl text-center text-orange-900 uppercase bg-orange-500 md:inline-block md:my-20 font-display'>
+        <h1 className='px-10 py-4 mb-10 text-3xl md:text-4xl text-center text-orange-900 uppercase bg-orange-500 md:inline-block md:my-20 font-display'>
           {locale === 'en'
             ? 'A new era in urban fashion'
             : 'Nueva era en la moda urbana'}
         </h1>
         <div className='container px-6 pb-10 mx-auto text-left md:px-20'>
-          <p className='mb-20 text-yellow-900 max-w-prose md:text-xl dark:text-gray-400'>
+          <p className='mb-20 text-yellow-900 max-w-prose text-xl dark:text-gray-400'>
             {locale === 'en'
               ? "Since our beginnings we have styled and dressed many artists. Among them are Jowell & Randy and their dancers. They wear DOXIS' products for every major show since 2012."
               : 'Desde nuestros inicios hemos estilizado y vestido a muchos artistas. Entre ellos se encuentran Jowell & Randy y sus bailarines. Llevan los productos de DOXIS en todos los espectáculos importantes desde 2012.'}
@@ -180,7 +180,7 @@ export default function Home({ instagramPosts, products, helpers }) {
           target='_blank'
           rel='noreferrer'
         >
-          <h1 className='items-center px-10 py-4 mb-10 text-4xl text-center text-orange-900 uppercase bg-orange-500 fill-current sm:flex md:inline-flex md:my-20 font-display'>
+          <h1 className='items-center px-10 py-4 mb-10 text-3xl md:text-4xl text-center text-orange-900 uppercase bg-orange-500 fill-current sm:flex md:inline-flex md:my-20 font-display'>
             <svg
               className='hidden mr-3 sm:inline-block'
               xmlns='http://www.w3.org/2000/svg'
