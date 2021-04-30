@@ -36,14 +36,8 @@ export default function Collection({ collection, helpers }) {
             : `Colección ${collection.title}`}
         </h1>
         <div className='container px-6 pb-10 mx-auto text-left md:px-20'>
-          <div
-            className='mb-20 text-gray-900 md:text-lg dark:text-gray-400'
-            dangerouslySetInnerHTML={{
-              __html: collection.descriptionHtml,
-            }}
-          ></div>
           {filters.length > 0 && (
-            <div className='my-10'>
+            <div className='mb-10'>
               <button
                 className={`px-2 py-1 text-sm tracking-wider uppercase rounded whitespace-nowrap m-1 cursor-pointer ${
                   state === '*'
@@ -103,6 +97,12 @@ export default function Collection({ collection, helpers }) {
               )
             })}
           </div>
+          <div
+            className='mt-20 text-gray-900 md:text-lg dark:text-gray-400'
+            dangerouslySetInnerHTML={{
+              __html: collection.descriptionHtml,
+            }}
+          ></div>
         </div>
       </section>
     </Layout>
