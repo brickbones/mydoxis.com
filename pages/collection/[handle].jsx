@@ -24,11 +24,11 @@ export default function Collection({ collection, helpers }) {
 
   return (
     <Layout helpers={helpers}>
-      {/* {collection.image && (
-        <div className='aspect-w-16 aspect-h-9 overflow-hidden'>
+      {collection.image.src && (
+        <div className='aspect-w-3 aspect-h-1 overflow-hidden'>
           <Image src={collection.image.src} objectFit='cover' layout='fill' />
         </div>
-      )} */}
+      )}
       <section className='pb-32 text-right bg-gradient-to-r from-gray-200 to-gray-300'>
         <h1 className='px-10 py-4 mb-10 text-4xl text-orange-900 uppercase bg-orange-500 md:inline-block md:my-20 font-display'>
           {locale === 'en'
@@ -36,9 +36,6 @@ export default function Collection({ collection, helpers }) {
             : `Colección ${collection.title}`}
         </h1>
         <div className='container px-6 pb-10 mx-auto text-left md:px-20'>
-          {collection.image.src && (
-            <img className='md:w-1/2 mb-10' src={collection.image.src} />
-          )}
           <div
             className='mb-20 text-gray-900 md:text-lg dark:text-gray-400'
             dangerouslySetInnerHTML={{
