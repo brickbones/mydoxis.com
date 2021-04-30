@@ -36,7 +36,7 @@ export default function Collection({ collection, helpers }) {
             : `Colección ${collection.title}`}
         </h1>
         <div className='container px-6 pb-10 mx-auto text-left md:px-20'>
-          {collection.image && (
+          {collection.image.src && (
             <img className='md:w-1/2 mb-10' src={collection.image.src} />
           )}
           <div
