@@ -86,7 +86,7 @@ export default function Home({ instagramPosts, products, helpers }) {
           {locale === 'en' ? 'Fresh & New' : 'Nuevos Productos'}
         </h1>
         <div className='container px-6 pb-10 mx-auto text-left md:px-20'>
-          <div className='grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-2 lg:md:grid-cols-4'>
+          <div className='grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4'>
             {_.map(products.slice(0, 8), (product) => {
               return (
                 <figure
@@ -116,7 +116,11 @@ export default function Home({ instagramPosts, products, helpers }) {
       </section>
 
       <section className='pb-32 overflow-hidden text-right'>
-        <h1 className='px-10 py-4 mb-10 text-3xl md:text-4xl text-center text-orange-900 uppercase bg-orange-500 md:inline-block md:my-20 font-display'>
+        <h1 className='px-10 py-4 mb-10 text-3xl md:text-4xl text-center md:text-right text-orange-900 uppercase bg-orange-500 md:inline-block md:my-20 font-display'>
+          <span className='hidden md:inline'>
+            Jowell &amp; Randy
+            <br />
+          </span>
           {locale === 'en'
             ? 'A new era in urban fashion'
             : 'Nueva era en la moda urbana'}

@@ -98,7 +98,7 @@ export default function Collection({ collection, helpers }) {
             })}
           </div>
           <div
-            className='mt-20 text-gray-900 text-lg'
+            className='mt-20 text-gray-900 text-lg max-w-prose'
             dangerouslySetInnerHTML={{
               __html: collection.descriptionHtml,
             }}
