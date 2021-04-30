@@ -25,12 +25,12 @@ export default function Collection({ collection, helpers }) {
   return (
     <Layout helpers={helpers}>
       {collection.image.src && (
-        <div className='aspect-w-3 aspect-h-1 overflow-hidden'>
+        <div className='aspect-w-2 aspect-h-1 md:aspect-w-3 md:aspect-h-1 overflow-hidden'>
           <Image src={collection.image.src} objectFit='cover' layout='fill' />
         </div>
       )}
-      <section className='pb-32 text-right bg-gradient-to-r from-gray-200 to-gray-300'>
-        <h1 className='px-10 py-4 mb-10 text-4xl text-orange-900 uppercase bg-orange-500 md:inline-block md:my-20 font-display'>
+      <section className='pb-32 text-center md:text-right bg-gradient-to-r from-gray-200 to-gray-300'>
+        <h1 className='px-10 py-4 mb-10 text-3xl md:text-4xl text-orange-900 uppercase bg-orange-500 md:inline-block md:my-20 font-display'>
           {locale === 'en'
             ? `${collection.title} Collection`
             : `Colección ${collection.title}`}
@@ -90,7 +90,7 @@ export default function Collection({ collection, helpers }) {
                       </div>
                     </a>
                   </Link>
-                  <figcaption className='px-4 py-2 text-xs font-bold tracking-wider text-center text-gray-500 uppercase'>
+                  <figcaption className='px-4 py-2 text-base md:text-xs font-bold tracking-wider text-center text-gray-500 uppercase'>
                     {product.title}
                   </figcaption>
                 </figure>
