@@ -112,9 +112,14 @@ export default function Header({ helpers, checkout }) {
               ]}
             />
           </HeaderLink>
-          <HeaderLink
+          {/* <HeaderLink
             href='/college-jackets'
             name={{ en: 'Jackets', es: 'Chaquetas' }}
+            locale={locale}
+          /> */}
+          <HeaderLink
+            href='/about-us'
+            name={{ en: 'About Us', es: 'Acerca de' }}
             locale={locale}
           />
           <HeaderLink
