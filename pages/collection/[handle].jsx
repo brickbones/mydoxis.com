@@ -5,6 +5,7 @@ import _ from 'lodash'
 import Client from 'shopify-buy'
 import Link from 'next/link'
 import Image from 'next/image'
+import anime from 'animejs'
 
 const client = Client.buildClient({
   domain: process.env.NEXT_PUBLIC_STORE_DOMAIN,
@@ -22,10 +23,77 @@ export default function Collection({ collection, helpers }) {
 
   filters = _.sortBy(_.compact(_.uniq(filters)))
 
+  function handleFilter(filter) {
+    const cards = document.querySelectorAll('.card-container')
+
+    if (filter === '*') {
+      _.forEach(cards, (card) => {
+        card.style.display = 'flex'
+      })
+
+      anime({
+        targets: cards,
+        opacity: [0, 1],
+        scale: [0.85, 1],
+        translateY: [100, 0],
+        easing: 'spring(1, 80, 10, 0)',
+        delay: anime.stagger(100),
+      })
+    } else {
+      const cards = document.querySelectorAll(
+        `.card-container[data-product-type=${filter}]`
+      )
+      const cardsHide = document.querySelectorAll(
+        `.card-container:not([data-product-type=${filter}])`
+      )
+
+      _.forEach(cards, (card) => {
+        card.style.display = 'flex'
+      })
+      _.forEach(cardsHide, (card) => {
+        card.style.display = 'none'
+      })
+
+      anime({
+        targets: cards,
+        opacity: [0, 1],
+        translateY: [100, 0],
+        scale: [0.85, 1],
+        easing: 'spring(1, 80, 10, 0)',
+        delay: anime.stagger(100),
+      })
+    }
+  }
+
+  useEffect(() => {
+    const cover = document.querySelector('.cover')
+    const cards = document.querySelectorAll('.card-container')
+
+    _.forEach(cards, (card) => {
+      card.style.opacity = 0
+    })
+
+    anime({
+      targets: cards,
+      opacity: [0, 1],
+      translateY: [100, 0],
+      scale: [0.85, 1],
+      easing: 'spring(1, 80, 10, 0)',
+      delay: anime.stagger(100),
+    })
+
+    function handleScroll() {
+      if (cover) cover.style.setProperty('--scroll', window.scrollY / 3 + 'px')
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    // return window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
     <Layout helpers={helpers}>
       {collection.image.src && (
-        <div className='aspect-w-2 aspect-h-1 md:aspect-w-3 md:aspect-h-1 overflow-hidden'>
+        <div className='aspect-w-2 aspect-h-1 md:aspect-w-3 md:aspect-h-1 overflow-hidden cover loading'>
           <Image src={collection.image.src} objectFit='cover' layout='fill' />
         </div>
       )}
@@ -37,15 +105,18 @@ export default function Collection({ collection, helpers }) {
         </h1>
         <div className='container px-6 pb-10 mx-auto text-left md:px-20'>
           {filters.length > 0 && (
-            <div className='mb-10'>
+            <div className='mb-10 filters'>
               <button
-                className={`px-2 py-1 text-sm tracking-wider uppercase rounded whitespace-nowrap m-1 cursor-pointer ${
+                className={`px-2 py-1 text-sm tracking-wider uppercase rounded whitespace-nowrap m-1 cursor-pointer font-semibold ${
                   state === '*'
                     ? 'bg-orange-400 text-orange-900'
                     : 'bg-gray-400 text-gray-200'
                 }`}
                 data-filter='*'
-                onClick={() => setState('*')}
+                onClick={() => {
+                  setState('*')
+                  handleFilter('*')
+                }}
               >
                 {locale === 'en' ? 'View All' : 'Ver Todo'}
               </button>
@@ -53,13 +124,16 @@ export default function Collection({ collection, helpers }) {
                 return (
                   <button
                     key={key}
-                    className={`px-2 py-1 text-sm tracking-wider uppercase  rounded whitespace-nowrap m-1 cursor-pointer ${
+                    className={`px-2 py-1 text-sm tracking-wider uppercase  rounded whitespace-nowrap m-1 cursor-pointer font-semibold ${
                       state === filter
                         ? 'bg-orange-400 text-orange-900'
                         : 'bg-gray-400 text-gray-200'
                     }`}
                     data-filter={filter}
-                    onClick={() => setState(filter)}
+                    onClick={() => {
+                      setState(filter)
+                      handleFilter(filter)
+                    }}
                   >
                     {filter}
                   </button>
@@ -67,38 +141,37 @@ export default function Collection({ collection, helpers }) {
               })}
             </div>
           )}
-          <div className='grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4'>
+          <div className='grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
             {_.map(collection.products, (product) => {
               return (
-                <figure
+                <div
                   key={product.id}
-                  className={`transition transform bg-gray-100 card md:hover:scale-110 ${
-                    state === '*' || state === product.productType.toLowerCase()
-                      ? 'block'
-                      : 'hidden'
-                  }`}
+                  className='card-container flex flex-col'
+                  data-product-type={product.productType.toLowerCase()}
                 >
-                  <Link href={`/product/${product.handle}/`} locale={locale}>
-                    <a>
-                      <div className='aspect-w-2 aspect-h-3'>
-                        <Image
-                          src={product.images[0].src}
-                          alt={product.handle}
-                          objectFit='cover'
-                          layout='fill'
-                        />
-                      </div>
-                    </a>
-                  </Link>
-                  <figcaption className='px-4 py-2 text-base md:text-xs font-bold tracking-wider text-center text-gray-500 uppercase'>
-                    {product.title}
-                  </figcaption>
-                </figure>
+                  <figure className='transition transform bg-gray-100 card flex flex-col flex-1'>
+                    <Link href={`/product/${product.handle}/`} locale={locale}>
+                      <a>
+                        <div className='aspect-w-2 aspect-h-3 loading'>
+                          <Image
+                            src={product.images[0].src}
+                            alt={product.handle}
+                            objectFit='cover'
+                            layout='fill'
+                          />
+                        </div>
+                      </a>
+                    </Link>
+                    <figcaption className='px-4 py-2.5 text-base md:text-xs font-semibold tracking-wider text-center text-gray-500 uppercase flex flex-col flex-1 justify-center'>
+                      {product.title}
+                    </figcaption>
+                  </figure>
+                </div>
               )
             })}
           </div>
           <div
-            className='mt-20 text-gray-900 text-lg max-w-prose'
+            className='mt-20 text-gray-900 text-lg md:text-xl max-w-prose'
             dangerouslySetInnerHTML={{
               __html: collection.descriptionHtml,
             }}

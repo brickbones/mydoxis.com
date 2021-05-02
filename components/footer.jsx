@@ -162,7 +162,7 @@ export default function Footer() {
         target='_blank'
         rel='noreferrer'
       >
-        <div className='fixed z-50 flex items-center px-4 py-1.5 font-bold text-gray-300 bg-gray-900 rounded right-4 bottom-4'>
+        <div className='fixed z-50 flex items-center px-4 py-1.5 font-semibold text-gray-300 bg-gray-900 rounded right-4 bottom-4'>
           <img
             className='h-5 mr-2'
             src='/svg/whatsapp-logo.svg'

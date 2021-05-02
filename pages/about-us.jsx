@@ -30,21 +30,21 @@ export default function AboutUs({ helpers }) {
           </p> */}
           <div className='mb-20 md:flex md:justify-between max-w-prose'>
             <div className='flex-1 mb-10 text-lg'>
-              <h4 className='mb-5 text-lg font-bold'>
+              <h4 className='mb-5 text-lg font-semibold'>
                 {locale === 'en' ? 'Products' : 'Productos'}
               </h4>
               <p>
-                LEYVAN @26leyvan26_aa
+                LEYVAN @26leyvan_aa
                 <br />
                 JUANFRAN @juanfran.oficial
                 <br />
                 VICTOR PEREZ @victorperez
                 <br />
-                DOXIS @mydoxis.com
+                DOXIS @mydoxis
               </p>
             </div>
             <div className='flex-1 mb-10 text-lg'>
-              <h4 className='mb-5 text-lg font-bold'>
+              <h4 className='mb-5 text-lg font-semibold'>
                 {locale === 'en' ? 'Address' : 'Dirección'}
               </h4>
               <p>

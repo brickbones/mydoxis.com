@@ -7,10 +7,11 @@ import NProgress from 'nprogress'
 import 'tailwindcss/tailwind.css'
 import '../styles/globals.css'
 import '@fontsource/roboto-slab/latin-400.css'
-import '@fontsource/roboto-slab/latin-700.css'
+import '@fontsource/roboto-slab/latin-600.css'
 import 'swiper/swiper.scss'
 import 'swiper/components/navigation/navigation.scss'
 import 'swiper/components/pagination/pagination.scss'
+import 'swiper/components/effect-fade/effect-fade.scss'
 
 export default function App({ Component, pageProps }) {
   const router = useRouter()
@@ -74,6 +75,10 @@ export default function App({ Component, pageProps }) {
     router.events.on('routeChangeStart', routeChangeStart)
     router.events.on('routeChangeComplete', routeChangeComplete)
     router.events.on('routeChangeError', routeChangeComplete)
+
+    routeChangeStart()
+    routeChangeComplete()
+
     return () => {
       router.events.off('routeChangeStart', routeChangeStart)
       router.events.off('routeChangeComplete', routeChangeComplete)

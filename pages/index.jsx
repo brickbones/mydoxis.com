@@ -4,78 +4,149 @@ import _ from 'lodash'
 import Client from 'shopify-buy'
 import Image from 'next/image'
 import Layout from '../components/layout'
-import SwiperCore, { Autoplay, Pagination } from 'swiper'
+import SwiperCore, { Autoplay, Pagination, EffectFade } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import Link from 'next/link'
+import anime from 'animejs'
 
 export default function Home({ instagramPosts, products, helpers }) {
   const { locale } = useRouter()
-  SwiperCore.use([Autoplay, Pagination])
+  SwiperCore.use([Autoplay, Pagination, EffectFade])
+
+  useEffect(() => {
+    const cover = document.querySelectorAll('.swiper-slide')
+    const cards = document.querySelectorAll('.card-container')
+    const videos = document.querySelectorAll('.youtube')
+
+    _.forEach(cards, (card) => {
+      card.style.opacity = 0
+    })
+
+    _.forEach(videos, (video) => {
+      video.style.opacity = 0
+    })
+
+    let observer = new IntersectionObserver((entries, observer) => {
+      _.forEach(entries, (entry) => {
+        if (entry.intersectionRatio > 0) {
+          anime({
+            targets: cards,
+            opacity: [0, 1],
+            scale: [0.85, 1],
+            translateY: [100, 0],
+            easing: 'spring(1, 80, 10, 0)',
+            delay: anime.stagger(200),
+          })
+
+          observer.unobserve(entry.target)
+        }
+      })
+    })
+
+    let videoObserver = new IntersectionObserver((entries, observer) => {
+      _.forEach(entries, (entry) => {
+        if (entry.intersectionRatio > 0) {
+          anime({
+            targets: entry.target,
+            opacity: [0, 1],
+            scale: [0.85, 1],
+            translateY: [100, 0],
+            easing: 'spring(1, 80, 10, 0)',
+            delay: 250,
+          })
+
+          observer.unobserve(entry.target)
+        }
+      })
+    })
+
+    observer.observe(document.querySelector('.grid'))
+    _.forEach(document.querySelectorAll('.youtube'), (video) =>
+      videoObserver.observe(video)
+    )
+
+    window.addEventListener('scroll', (e) => {
+      if (cover) {
+        _.forEach(cover, (slide) => {
+          slide.style.setProperty('--scroll', window.scrollY / 3 + 'px')
+        })
+      }
+    })
+  }, [])
 
   return (
     <Layout helpers={helpers}>
-      <section>
+      <section className='relative hero'>
+        <div className='absolute w-full flex items-center justify-center h-screen px-10 py-32 z-10 pointer-events-none'>
+          <img
+            className='absolute hidden w-3/5 sm:block logo'
+            src='/svg/doxis-full.svg'
+            alt='Logo DOXIS'
+          />
+          <img
+            className='absolute block w-3/5 p-8 sm:p-0 sm:hidden logo'
+            src='/svg/doxis-letter.svg'
+            alt='Logo DOXIS'
+          />
+          <img
+            className='absolute w-full p-10 sm:p-0 sm:w-1/3 symbol'
+            src='/svg/doxis.svg'
+            alt='Symbol DOXIS'
+          />
+        </div>
         <Swiper
           pagination={{ clickable: true }}
+          effect='fade'
           autoplay={{
             delay: 8000,
             disableOnInteraction: false,
           }}
         >
           <SwiperSlide>
-            <div className='relative flex items-center justify-center h-screen px-10 py-32 bg-gradient-to-t from-[#F6581E88] via-[#F6581E00] to-[#F6581E00]'>
-              <img
-                className='absolute hidden w-3/5 sm:block logo'
-                src='/svg/doxis-full.svg'
-                alt='Logo DOXIS'
-              />
-              <img
-                className='absolute block w-3/5 p-8 sm:p-0 sm:hidden logo'
-                src='/svg/doxis-letter.svg'
-                alt='Logo DOXIS'
-              />
-              <img
-                className='absolute w-full p-10 sm:p-0 sm:w-1/3 symbol'
-                src='/svg/doxis.svg'
-                alt='Symbol DOXIS'
-              />
-              <video
-                className='video-bg absolute object-cover h-screen w-screen top-0 left-0 z-[-1]'
-                poster='/video/bg.jpg'
-                loop
-                muted
-                autoPlay
-                playsInline
-              >
-                <source src='/video/bg.webm' type='video/webm' />
-                <source src='/video/bg.mp4' type='video/mp4' />
-              </video>
+            <div className='relative'>
+              <div className='flex items-center justify-center h-screen px-10 py-32'>
+                <video
+                  className='video-bg absolute object-cover h-screen w-screen top-0 left-0 z-[-1]'
+                  poster='/video/bg.jpg'
+                  loop
+                  muted
+                  autoPlay
+                  playsInline
+                >
+                  <source src='/video/bg.webm' type='video/webm' />
+                  <source src='/video/bg.mp4' type='video/mp4' />
+                </video>
+              </div>
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className='relative flex items-center justify-center h-screen px-10 py-32 bg-[#11182722] bg-gradient-to-t from-[#F6581E88] via-[#F6581E00] to-[#F6581E00]'>
-              <Image
-                className='z-[-1]'
-                src='/img/banner-collection.jpg'
-                objectFit='cover'
-                layout='fill'
-                quality='85'
-              />
+            <div className='relative'>
+              <div className='flex items-center justify-center h-screen px-10 py-32'>
+                <Image
+                  className='z-[-1]'
+                  src='/img/banner-collection.jpg'
+                  objectFit='cover'
+                  layout='fill'
+                  quality='85'
+                />
+              </div>
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className='relative flex items-center justify-center h-screen px-10 py-32 bg-[#11182733] bg-gradient-to-t from-[#F6581E88] via-[#F6581E00] to-[#F6581E00]'>
-              <video
-                className='video-bg absolute object-cover h-screen w-screen top-0 left-0 z-[-1]'
-                poster='/video/bg-video.jpg'
-                loop
-                muted
-                autoPlay
-                playsInline
-              >
-                <source src='/video/bg-video.webm' type='video/webm' />
-                <source src='/video/bg-video.mp4' type='video/mp4' />
-              </video>
+            <div className='relative'>
+              <div className='flex items-center justify-center h-screen px-10 py-32'>
+                <video
+                  className='video-bg absolute object-cover h-screen w-screen top-0 left-0 z-[-1]'
+                  poster='/video/bg-video.jpg'
+                  loop
+                  muted
+                  autoPlay
+                  playsInline
+                >
+                  <source src='/video/bg-video.webm' type='video/webm' />
+                  <source src='/video/bg-video.mp4' type='video/mp4' />
+                </video>
+              </div>
             </div>
           </SwiperSlide>
         </Swiper>
@@ -86,29 +157,28 @@ export default function Home({ instagramPosts, products, helpers }) {
           {locale === 'en' ? 'Fresh & New' : 'Nuevos Productos'}
         </h1>
         <div className='container px-6 pb-10 mx-auto text-left md:px-20'>
-          <div className='grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4'>
+          <div className='grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
             {_.map(products.slice(0, 8), (product) => {
               return (
-                <figure
-                  key={product.id}
-                  className={`transition transform bg-gray-100 card md:hover:scale-110`}
-                >
-                  <Link href={`/product/${product.handle}/`} locale={locale}>
-                    <a>
-                      <div className='aspect-w-2 aspect-h-3'>
-                        <Image
-                          src={product.images[0].src}
-                          alt={product.handle}
-                          objectFit='cover'
-                          layout='fill'
-                        />
-                      </div>
-                    </a>
-                  </Link>
-                  <figcaption className='px-4 py-2 text-base md:text-xs font-bold tracking-wider text-center text-gray-500 uppercase'>
-                    {product.title}
-                  </figcaption>
-                </figure>
+                <div key={product.id} className='card-container flex flex-col'>
+                  <figure className='transition transform bg-gray-100 card flex flex-col flex-1'>
+                    <Link href={`/product/${product.handle}/`} locale={locale}>
+                      <a>
+                        <div className='aspect-w-2 aspect-h-3 loading'>
+                          <Image
+                            src={product.images[0].src}
+                            alt={product.handle}
+                            objectFit='cover'
+                            layout='fill'
+                          />
+                        </div>
+                      </a>
+                    </Link>
+                    <figcaption className='px-4 py-2.5 text-base md:text-xs font-semibold tracking-wider text-center text-gray-500 uppercase flex flex-col flex-1 justify-center'>
+                      {product.title}
+                    </figcaption>
+                  </figure>
+                </div>
               )
             })}
           </div>
@@ -134,6 +204,7 @@ export default function Home({ instagramPosts, products, helpers }) {
           <div className='mb-12 lg:pl-96'>
             <div className='aspect-w-16 aspect-h-9'>
               <iframe
+                className='youtube'
                 title='Jowell y Randy x J Balvin - Anaranjado'
                 width='560'
                 height='315'
@@ -145,7 +216,7 @@ export default function Home({ instagramPosts, products, helpers }) {
                 return (
                   <div
                     key={i}
-                    className={`bg-orange-500 hidden md:block w-96 h-96 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border border-orange-500 bg-opacity-25 rounded-full circle-0${i}`}
+                    className={`bg-orange-500 hidden md:block w-96 h-96 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border border-orange-500 bg-opacity-25 rounded-full circle-0${i} z-[-1]`}
                   />
                 )
               })}
@@ -154,6 +225,7 @@ export default function Home({ instagramPosts, products, helpers }) {
           <div className='mb-12 lg:pr-96 lg:pl-10'>
             <div className='aspect-w-16 aspect-h-9'>
               <iframe
+                className='youtube'
                 title='Jowell y Randy - Perriando'
                 width='560'
                 height='315'
@@ -166,6 +238,7 @@ export default function Home({ instagramPosts, products, helpers }) {
           <div className='lg:pr-32 lg:pl-96'>
             <div className='aspect-w-16 aspect-h-9'>
               <iframe
+                className='youtube'
                 title='Jowell y Randy, Kiko El Crazy - Se Acabó La Cuarentena'
                 width='560'
                 height='315'
@@ -203,6 +276,9 @@ export default function Home({ instagramPosts, products, helpers }) {
             delay: 10000,
             disableOnInteraction: false,
           }}
+          freeMode={true}
+          centeredSlides={true}
+          loop={true}
           breakpoints={{
             640: { slidesPerView: 2 },
             768: { slidesPerView: 3 },
@@ -211,7 +287,7 @@ export default function Home({ instagramPosts, products, helpers }) {
         >
           {_.map(instagramPosts, ({ url, src, title }, i) => {
             return (
-              <SwiperSlide className='p-4' key={i}>
+              <SwiperSlide className='p-4 loading' key={i}>
                 <a
                   className='block overflow-hidden rounded-sm max-w-[100%] aspect-w-1 aspect-h-1'
                   href={`https://www.instagram.com/p/${url}`}

@@ -10,7 +10,7 @@ export default function Cart({ helpers, menu }) {
       <div className='z-50 lg:fixed lg:top-4 lg:right-4'>
         <Link href='/cart'>
           <a
-            className={`flex items-center text-xl font-bold ${
+            className={`flex items-center text-xl font-semibold ${
               menu ? 'text-gray-800' : 'text-white'
             } lg:text-gray-300 lg:bg-gray-900 rounded-sm lg:rounded-md lg:p-2.5 lg:text-base`}
           >

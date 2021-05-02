@@ -6,7 +6,7 @@ import Cart from './cart'
 
 function HeaderLink({ href, name, locale, children }) {
   return (
-    <li className='relative block px-8 py-5 text-xs font-bold tracking-widest text-gray-900 uppercase whitespace-nowrap'>
+    <li className='relative block px-8 py-5 text-xs font-semibold tracking-widest text-gray-900 uppercase whitespace-nowrap'>
       {href ? (
         <Link href={href} locale={locale}>
           <a>{locale === 'en' ? name.en : name.es}</a>
@@ -193,7 +193,7 @@ export default function Header({ helpers, checkout }) {
         </div>
       </div>
       <div
-        className={`fixed z-10 w-screen h-screen bg-gradient-to-r from-gray-400 to-gray-300 items-center justify-center text-3xl sm:text-2xl md:text-3xl leading-relaxed font-bold ${
+        className={`fixed z-20 w-screen h-screen bg-gradient-to-r from-gray-400 to-gray-300 items-center justify-center text-3xl sm:text-2xl md:text-3xl leading-relaxed  ${
           menu ? 'flex' : 'hidden'
         }`}
       >

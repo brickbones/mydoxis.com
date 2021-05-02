@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Layout from '../components/layout'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Cart({ helpers, checkout }) {
   const { locale } = useRouter()
@@ -24,6 +25,13 @@ export default function Cart({ helpers, checkout }) {
           {locale === 'en' ? 'Cart' : 'Carrito'}
         </h1>
         <div className='container px-6 pb-10 mx-auto md:px-20'>
+          <Link href={`/collection/doxis`} locale={locale}>
+            <a className='px-2 py-1 mb-10 text-xs font-semibold tracking-wider text-gray-200 uppercase bg-gray-400 rounded whitespace-nowrap inline-block'>
+              {locale === 'en'
+                ? '← Continue shopping'
+                : '← Continuar comprando'}
+            </a>
+          </Link>
           {count > 0 ? (
             <>
               <ul className='mb-20 text-base md:text-xl'>
@@ -49,14 +57,14 @@ export default function Cart({ helpers, checkout }) {
                         {item.title}
                         <span className='ml-2 text-gray-500 md:ml-5'>{`x ${item.quantity}`}</span>
                       </p>
-                      <span className='px-2 text-xs font-bold tracking-wider text-gray-500 uppercase md:px-10'>
+                      <span className='px-2 text-xs font-semibold tracking-wider text-gray-500 uppercase md:px-10'>
                         {_.map(
                           item.variant.selectedOptions,
                           (option) => `${option.name}: ${option.value}`
                         ).join(' · ')}
                       </span>
                       <button
-                        className='px-2 py-1 text-xs font-bold tracking-wider text-gray-200 uppercase bg-gray-400 rounded whitespace-nowrap'
+                        className='px-2 py-1 text-xs font-semibold tracking-wider text-gray-200 uppercase bg-gray-400 rounded whitespace-nowrap'
                         data-id={item.id}
                         onClick={handleClick}
                       >
@@ -80,14 +88,14 @@ export default function Cart({ helpers, checkout }) {
                     ? `${count} productos`
                     : `${count} producto`}{' '}
                   &middot; <br className='sm:hidden' />
-                  <span className='font-bold'>
+                  <span className='font-semibold'>
                     {locale === 'en' ? 'Total:' : 'Valor total:'}{' '}
                     {checkout.totalPriceV2.currencyCode}{' '}
                     {checkout.totalPriceV2.amount}
                   </span>
                 </div>
                 <button
-                  className='px-4 py-1.5 bg-gray-500 rounded whitespace-nowrap text-gray-50 font-bold disabled:bg-gray-400 disabled:text-gray-300'
+                  className='px-4 py-1.5 bg-gray-500 rounded whitespace-nowrap text-gray-50 font-semibold disabled:bg-gray-400 disabled:text-gray-300'
                   onClick={handleCheckout}
                 >
                   {locale === 'en'

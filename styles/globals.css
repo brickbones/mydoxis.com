@@ -141,12 +141,6 @@ body {
 }
 
 @screen md {
-  .card:hover {
-    box-shadow: 0 3.4px 2.7px rgba(0, 0, 0, 0.078),
-      0 8.7px 6.9px rgba(0, 0, 0, 0.111), 0 17.7px 14.2px rgba(0, 0, 0, 0.139),
-      0 36.5px 29.2px rgba(0, 0, 0, 0.172), 0 100px 80px rgba(0, 0, 0, 0.25);
-  }
-
   .submenu {
     display: none;
     writing-mode: horizontal-tb;
@@ -277,7 +271,7 @@ main {
   top: 0;
   left: 0;
   right: 0;
-  height: 0.25rem;
+  height: 0.35rem;
 }
 
 #nprogress .bar {
@@ -364,4 +358,112 @@ main {
   100% {
     opacity: 0;
   }
+}
+
+.card {
+  border-radius: 0.25rem;
+  overflow: hidden;
+  position: relative;
+}
+
+@media (hover: hover) {
+  .card-container:hover {
+    z-index: 10;
+  }
+
+  .card:hover {
+    z-index: 10;
+    transform: scale(1.1);
+    box-shadow: 0 3.4px 2.7px rgba(0, 0, 0, 0.078),
+      0 8.7px 6.9px rgba(0, 0, 0, 0.111), 0 17.7px 14.2px rgba(0, 0, 0, 0.139),
+      0 36.5px 29.2px rgba(0, 0, 0, 0.172), 0 100px 80px rgba(0, 0, 0, 0.25);
+  }
+
+  .card:after {
+    content: '';
+    position: absolute;
+    top: -110%;
+    left: -210%;
+    width: 200%;
+    height: 200%;
+    opacity: 0;
+    transform: rotate(30deg);
+    pointer-events: none;
+
+    background: rgba(255, 255, 255, 0);
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0) 77%,
+      rgba(255, 255, 255, 0.5) 92%,
+      rgba(255, 255, 255, 0) 100%
+    );
+
+    mix-blend-mode: overlay;
+  }
+
+  /* Hover state - trigger effect */
+
+  .card:hover:after {
+    opacity: 1;
+    top: -30%;
+    left: -30%;
+    transition-property: left, top, opacity;
+    transition-duration: 0.7s, 0.7s, 0.15s;
+    transition-timing-function: ease;
+  }
+
+  /* Active state */
+
+  .card:active:after {
+    opacity: 0;
+  }
+}
+
+.cover > div,
+.hero .swiper-slide > div {
+  z-index: -1;
+  transform: translateY(var(--scroll));
+}
+
+.hero .swiper-slide > div > div {
+  background: linear-gradient(
+    rgba(246, 88, 30, 0) 25%,
+    rgba(246, 88, 30, 0.85)
+  );
+}
+
+.hero .swiper-pagination-bullet {
+  @apply bg-white opacity-30 !important;
+}
+
+.hero .swiper-pagination-bullet-active {
+  @apply bg-white opacity-100 !important;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50px;
+  height: 50px;
+  margin-top: -25px;
+  margin-left: -25px;
+  border-radius: 50%;
+  border: 5px solid rgba(246, 88, 30, 0.25);
+  border-top-color: rgb(246, 88, 30);
+  animation: spinner 0.65s linear infinite;
+  z-index: -1;
+}
+
+.filters button:focus {
+  outline: 0;
 }
