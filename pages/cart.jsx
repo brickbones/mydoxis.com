@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import Layout from '../components/layout'
 import Image from 'next/image'
 import Link from 'next/link'
+import anime from 'animejs'
 
 export default function Cart({ helpers, checkout }) {
   const { locale } = useRouter()
@@ -16,7 +17,24 @@ export default function Cart({ helpers, checkout }) {
     window.open(checkout.webUrl, '_self')
   }
 
-  useEffect(() => {}, [])
+  useEffect(() => {
+    const items = document.querySelectorAll('.product-list')
+
+    _.forEach(items, (item) => {
+      item.style.opacity = 0
+    })
+
+    setTimeout(() => {
+      anime({
+        targets: items,
+        opacity: [0, 1],
+        translateX: [200, 0],
+        scale: [0.85, 1],
+        easing: 'spring(1, 80, 10, 0)',
+        delay: anime.stagger(100),
+      })
+    }, 500)
+  }, [])
 
   return (
     <Layout helpers={helpers}>
@@ -32,7 +50,7 @@ export default function Cart({ helpers, checkout }) {
                   return (
                     <li
                       key={item.id}
-                      className='flex items-center justify-between py-2 border-b border-gray-400 md:py-0 even:bg-gray-300'
+                      className='flex items-center justify-between py-2 border-b border-gray-400 md:py-0 even:bg-gray-300 product-list'
                     >
                       <div className='hidden md:block'>
                         <div className='w-20 h-20 p-2'>
@@ -110,7 +128,7 @@ export default function Cart({ helpers, checkout }) {
           ) : (
             <p className='mb-10 text-lg'>
               {locale === 'en'
-                ? 'Nothing in the cart yet. Keep shopping!'
+                ? 'Nothing in the cart yet. Continue shopping!'
                 : 'Nada en el carrito todavía. ¡Continua comprando!'}
             </p>
           )}

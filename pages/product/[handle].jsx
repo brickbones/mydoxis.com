@@ -112,7 +112,7 @@ export default function Product({ product, helpers }) {
                 {locale === 'en' ? 'Out of stock' : 'Agotado'}
               </span>
             )}
-            <div className='p-10 text-left md:p-20'>
+            <div className='p-10 pb-4 text-left md:p-20 md:pb-8'>
               {product.productType && (
                 <span className='inline-block px-1.5 py-0.5 text-xs font-semibold tracking-wider text-orange-500 uppercase bg-orange-200 rounded-sm'>
                   {product.productType}
@@ -179,8 +179,8 @@ export default function Product({ product, helpers }) {
             >
               <a className='px-2 py-1 text-xs font-semibold tracking-wider text-gray-200 uppercase bg-gray-400 rounded whitespace-nowrap inline-block'>
                 {locale === 'en'
-                  ? '← Back to collection'
-                  : '← Volver a la colección'}
+                  ? '← Continue shopping'
+                  : '← Continuar comprando'}
               </a>
             </Link>
           </div>
