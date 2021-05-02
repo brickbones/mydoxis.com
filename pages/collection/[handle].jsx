@@ -93,7 +93,7 @@ export default function Collection({ collection, helpers }) {
   return (
     <Layout helpers={helpers}>
       {collection.image.src && (
-        <div className='aspect-w-2 aspect-h-1 md:aspect-w-3 md:aspect-h-1 overflow-hidden cover loading'>
+        <div className='aspect-w-2 aspect-h-1 md:aspect-w-3 md:aspect-h-1 overflow-hidden cover'>
           <Image src={collection.image.src} objectFit='cover' layout='fill' />
         </div>
       )}

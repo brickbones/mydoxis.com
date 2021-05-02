@@ -72,8 +72,9 @@ export default function Product({ product, helpers }) {
   return (
     <Layout helpers={helpers}>
       <section className='lg:flex'>
-        <div className='overflow-hidden md:h-screen lg:w-1/2'>
+        <div className='overflow-hidden flex lg:w-1/2'>
           <Swiper
+            className='flex-1'
             pagination={{ clickable: true }}
             autoplay={{
               delay: 3500,
