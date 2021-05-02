@@ -106,7 +106,7 @@ export default function Product({ product, helpers }) {
         </div>
 
         <div className='relative justify-center lg:w-1/2 lg:flex lg:flex-col bg-gradient-to-r from-gray-200 to-gray-300'>
-          <div className='px-10 md:px-20'>
+          <div className='px-10 md:px-20 pt-10 md:pt-0'>
             <Link
               href={`/collection/${product.vendor.toLowerCase()}`}
               locale={locale}
