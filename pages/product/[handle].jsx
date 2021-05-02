@@ -106,18 +106,6 @@ export default function Product({ product, helpers }) {
         </div>
 
         <div className='relative justify-center lg:w-1/2 lg:flex lg:flex-col bg-gradient-to-r from-gray-200 to-gray-300'>
-          <div className='px-10 md:px-20 pt-10 md:pt-0'>
-            <Link
-              href={`/collection/${product.vendor.toLowerCase()}`}
-              locale={locale}
-            >
-              <a className='px-2 py-1 text-xs font-semibold tracking-wider text-gray-200 uppercase bg-gray-400 rounded whitespace-nowrap inline-block'>
-                {locale === 'en'
-                  ? '← Back to collection'
-                  : '← Volver a la colección'}
-              </a>
-            </Link>
-          </div>
           <div className='text-lg text-right'>
             {!product.availableForSale && (
               <span className='inline-block px-6 py-2 mt-10 text-xl tracking-wide text-gray-300 uppercase bg-gray-500 md:right-0 md:absolute md:top-20 font-display'>
@@ -183,6 +171,18 @@ export default function Product({ product, helpers }) {
                 </button>
               </div>
             </div>
+          </div>
+          <div className='px-10 md:px-20 pb-10'>
+            <Link
+              href={`/collection/${product.vendor.toLowerCase()}`}
+              locale={locale}
+            >
+              <a className='px-2 py-1 text-xs font-semibold tracking-wider text-gray-200 uppercase bg-gray-400 rounded whitespace-nowrap inline-block'>
+                {locale === 'en'
+                  ? '← Back to collection'
+                  : '← Volver a la colección'}
+              </a>
+            </Link>
           </div>
         </div>
       </section>

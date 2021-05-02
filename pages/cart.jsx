@@ -25,13 +25,6 @@ export default function Cart({ helpers, checkout }) {
           {locale === 'en' ? 'Cart' : 'Carrito'}
         </h1>
         <div className='container px-6 pb-10 mx-auto md:px-20'>
-          <Link href={`/collection/doxis`} locale={locale}>
-            <a className='px-2 py-1 mb-10 text-xs font-semibold tracking-wider text-gray-200 uppercase bg-gray-400 rounded whitespace-nowrap inline-block'>
-              {locale === 'en'
-                ? '← Continue shopping'
-                : '← Continuar comprando'}
-            </a>
-          </Link>
           {count > 0 ? (
             <>
               <ul className='mb-20 text-base md:text-xl'>
@@ -95,7 +88,7 @@ export default function Cart({ helpers, checkout }) {
                   </span>
                 </div>
                 <button
-                  className='px-4 py-1.5 bg-gray-500 rounded whitespace-nowrap text-gray-50 font-semibold disabled:bg-gray-400 disabled:text-gray-300'
+                  className='m-1.5 mt-10 md:mt-0 px-4 py-1.5 bg-orange-500 rounded whitespace-nowrap text-gray-50 font-semibold disabled:bg-gray-400 disabled:text-gray-300'
                   onClick={handleCheckout}
                 >
                   {locale === 'en'
@@ -103,6 +96,15 @@ export default function Cart({ helpers, checkout }) {
                     : 'Continuar con el pago'}{' '}
                   &#8599;
                 </button>
+              </div>
+              <div className='text-center md:text-right pt-5'>
+                <Link href={`/collection/doxis`} locale={locale}>
+                  <a className='m-1.5 mt-10 md:mt-0 px-4 py-1.5 bg-gray-400 rounded whitespace-nowrap text-gray-50 font-semibold disabled:bg-gray-400 disabled:text-gray-300'>
+                    {locale === 'en'
+                      ? '← Continue shopping'
+                      : '← Continuar comprando'}
+                  </a>
+                </Link>
               </div>
             </>
           ) : (
