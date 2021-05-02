@@ -7,6 +7,7 @@ import Layout from '../../components/layout'
 import SwiperCore, { Autoplay, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import Link from 'next/link'
+import anime from 'animejs'
 
 const client = Client.buildClient({
   domain: process.env.NEXT_PUBLIC_STORE_DOMAIN,
@@ -69,6 +70,21 @@ export default function Product({ product, helpers }) {
       : (description = product.description.match(regex)[2])
   }
 
+  useEffect(() => {
+    const parallax = document.querySelectorAll('.parallax')
+
+    function handleScroll() {
+      if (parallax) {
+        _.forEach(parallax, (parallaxItem) => {
+          parallaxItem.style.setProperty('--scroll', window.scrollY / 3 + 'px')
+        })
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    // return window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
     <Layout helpers={helpers}>
       <section className='lg:flex'>
@@ -93,13 +109,15 @@ export default function Product({ product, helpers }) {
                     layout='fill'
                     quality='5'
                   />
-                  <Image
-                    src={src}
-                    alt={altText}
-                    objectFit='contain'
-                    layout='fill'
-                    quality='85'
-                  />
+                  <div class='parallax'>
+                    <Image
+                      src={src}
+                      alt={altText}
+                      objectFit='contain'
+                      layout='fill'
+                      quality='85'
+                    />
+                  </div>
                 </div>
               </SwiperSlide>
             ))}
@@ -109,7 +127,7 @@ export default function Product({ product, helpers }) {
         <div className='relative justify-center lg:w-1/2 lg:flex lg:flex-col bg-gradient-to-r from-gray-200 to-gray-300'>
           <div className='text-lg text-right'>
             {!product.availableForSale && (
-              <span className='inline-block px-6 py-2 mt-10 text-xl tracking-wide text-gray-300 uppercase bg-gray-500 md:right-0 md:absolute md:top-20 font-display'>
+              <span className='inline-block px-6 py-2 mt-10 text-xl md:text-2xl tracking-wide text-gray-300 uppercase bg-gray-500 md:right-0 md:absolute md:top-8 font-display'>
                 {locale === 'en' ? 'Out of stock' : 'Agotado'}
               </span>
             )}

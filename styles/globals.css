@@ -426,6 +426,11 @@ main {
   transform: translateY(var(--scroll));
 }
 
+.parallax > div {
+  z-index: 10;
+  transform: translateY(var(--scroll));
+}
+
 .hero .swiper-slide > div > div {
   background: linear-gradient(
     rgba(246, 88, 30, 0) 25%,
