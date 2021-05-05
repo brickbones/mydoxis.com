@@ -7,7 +7,6 @@ import Layout from '../../components/layout'
 import SwiperCore, { Autoplay, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import Link from 'next/link'
-import anime from 'animejs'
 
 const client = Client.buildClient({
   domain: process.env.NEXT_PUBLIC_STORE_DOMAIN,
@@ -70,21 +69,6 @@ export default function Product({ product, helpers }) {
       : (description = product.description.match(regex)[2])
   }
 
-  useEffect(() => {
-    const parallax = document.querySelectorAll('.parallax')
-
-    function handleScroll() {
-      if (parallax) {
-        _.forEach(parallax, (parallaxItem) => {
-          parallaxItem.style.setProperty('--scroll', window.scrollY / 3 + 'px')
-        })
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    // return window.removeEventListener('scroll', handleScroll)
-  }, [])
-
   return (
     <Layout helpers={helpers}>
       <section className='lg:flex'>
@@ -109,15 +93,13 @@ export default function Product({ product, helpers }) {
                     layout='fill'
                     quality='5'
                   />
-                  <div class='parallax'>
-                    <Image
-                      src={src}
-                      alt={altText}
-                      objectFit='contain'
-                      layout='fill'
-                      quality='85'
-                    />
-                  </div>
+                  <Image
+                    src={src}
+                    alt={altText}
+                    objectFit='contain'
+                    layout='fill'
+                    quality='85'
+                  />
                 </div>
               </SwiperSlide>
             ))}
