@@ -92,11 +92,17 @@ export default function Collection({ collection, helpers }) {
 
   return (
     <Layout helpers={helpers}>
-      {collection.image.src && (
-        <div className='aspect-w-2 aspect-h-1 md:aspect-w-3 md:aspect-h-1 overflow-hidden cover'>
+      <div
+        className={`overflow-hidden cover ${
+          collection.image.src
+            ? 'aspect-w-2 aspect-h-1 md:aspect-w-3 md:aspect-h-1'
+            : 'h-0 hidden'
+        }`}
+      >
+        {collection.image.src && (
           <Image src={collection.image.src} objectFit='cover' layout='fill' />
-        </div>
-      )}
+        )}
+      </div>
       <section className='pb-32 text-center md:text-right bg-gradient-to-r from-gray-200 to-gray-300'>
         <h1 className='px-10 py-4 mb-10 text-3xl md:text-4xl text-orange-900 uppercase bg-orange-500 md:inline-block md:my-20 font-display'>
           {locale === 'en'
@@ -141,35 +147,47 @@ export default function Collection({ collection, helpers }) {
               })}
             </div>
           )}
-          <div className='grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-            {_.map(collection.products, (product) => {
-              return (
-                <div
-                  key={product.id}
-                  className='card-container flex flex-col'
-                  data-product-type={product.productType.toLowerCase()}
-                >
-                  <figure className='transition transform bg-gray-100 card flex flex-col flex-1'>
-                    <Link href={`/product/${product.handle}/`} locale={locale}>
-                      <a>
-                        <div className='aspect-w-2 aspect-h-3 loading'>
-                          <Image
-                            src={product.images[0].src}
-                            alt={product.handle}
-                            objectFit='cover'
-                            layout='fill'
-                          />
-                        </div>
-                      </a>
-                    </Link>
-                    <figcaption className='px-4 py-2.5 text-base md:text-xs font-semibold tracking-wider text-center text-gray-500 uppercase flex flex-col flex-1 justify-center'>
-                      {product.title}
-                    </figcaption>
-                  </figure>
-                </div>
-              )
-            })}
-          </div>
+          {collection.products.length > 0 ? (
+            <div className='grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+              {_.map(collection.products, (product) => {
+                return (
+                  <div
+                    key={product.id}
+                    className='card-container flex flex-col'
+                    data-product-type={product.productType.toLowerCase()}
+                  >
+                    <figure className='transition transform bg-gray-100 card flex flex-col flex-1'>
+                      <Link
+                        href={`/product/${product.handle}/`}
+                        locale={locale}
+                      >
+                        <a>
+                          <div className='aspect-w-2 aspect-h-3 loading'>
+                            <Image
+                              src={product.images[0].src}
+                              alt={product.handle}
+                              objectFit='cover'
+                              layout='fill'
+                            />
+                          </div>
+                        </a>
+                      </Link>
+                      <figcaption className='px-4 py-2.5 text-base md:text-xs font-semibold tracking-wider text-center text-gray-500 uppercase flex flex-col flex-1 justify-center'>
+                        {product.title}
+                      </figcaption>
+                    </figure>
+                  </div>
+                )
+              })}
+            </div>
+          ) : (
+            <h1 className='text-4xl font-bold'>
+              {locale === 'en'
+                ? 'Collection coming soon...'
+                : 'Colección muy pronto...'}
+            </h1>
+          )}
+
           <div
             className='mt-20 text-gray-900 text-lg md:text-xl max-w-prose'
             dangerouslySetInnerHTML={{
