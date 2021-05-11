@@ -34,13 +34,61 @@ export default function AboutUs({ helpers }) {
                 {locale === 'en' ? 'Products' : 'Productos'}
               </h4>
               <p>
-                LEYVAN @26leyvan_aa
+                DOXIS{' '}
+                <a
+                  className='underline'
+                  href='https://www.instagram.com/jowellgram/'
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  @jowellgram
+                </a>{' '}
+                <a
+                  className='underline'
+                  href='https://www.instagram.com/randynotagram/'
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  @randynotagram
+                </a>{' '}
+                <a
+                  className='underline'
+                  href='https://www.instagram.com/mydoxis/'
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  @mydoxis
+                </a>
                 <br />
-                JUANFRAN @juanfran.oficial
+                LEYVAN{' '}
+                <a
+                  className='underline'
+                  href='https://www.instagram.com/26leyvan_aa/'
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  @26leyvan_aa
+                </a>
                 <br />
-                VICTOR PEREZ @victorperez
+                JUANFRAN{' '}
+                <a
+                  className='underline'
+                  href='https://www.instagram.com/juanfran.oficial/'
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  @juanfran.oficial
+                </a>
                 <br />
-                DOXIS @mydoxis
+                VICTOR PEREZ{' '}
+                <a
+                  className='underline'
+                  href='https://www.instagram.com/victorperez/'
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  @victorperez
+                </a>
               </p>
             </div>
             <div className='flex-1 mb-10 text-lg'>
