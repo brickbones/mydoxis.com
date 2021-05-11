@@ -132,7 +132,7 @@ export default function Home({ instagramPosts, products, helpers }) {
               </div>
             </div>
           </SwiperSlide>
-          <SwiperSlide>
+          {/* <SwiperSlide>
             <div className='relative'>
               <div className='flex items-center justify-center h-screen px-10 py-32'>
                 <video
@@ -148,7 +148,7 @@ export default function Home({ instagramPosts, products, helpers }) {
                 </video>
               </div>
             </div>
-          </SwiperSlide>
+          </SwiperSlide> */}
         </Swiper>
       </section>
 
@@ -322,17 +322,10 @@ export async function getStaticProps(context) {
     handle: 'doxis',
   }).id
 
-  let {
-    handle,
-    description,
-    descriptionHtml,
-    id,
-    image,
-    title,
-    products,
-  } = await client.collection.fetchWithProducts(collectionId, {
-    productsFirst: 100,
-  })
+  let { handle, description, descriptionHtml, id, image, title, products } =
+    await client.collection.fetchWithProducts(collectionId, {
+      productsFirst: 100,
+    })
 
   let posts = [
     {
