@@ -126,6 +126,7 @@ export default function Product({ product, helpers }) {
               {description && <p className='mb-10'>{description}</p>}
               <div className='flex flex-col text-base sm:items-end sm:flex-row'>
                 {_.map(product.options, ({ id, name, values }) => {
+                  if (name === 'Title') return
                   return (
                     <label className='m-1.5' key={id}>
                       {`${name}:`}
