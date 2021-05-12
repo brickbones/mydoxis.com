@@ -1,8 +1,0 @@
-{
-  "redirects": [
-    {
-      "source": "/admin",
-      "destination": "https://mydoxis-com.myshopify.com/admin"
-    }
-  ]
-}

@@ -3,15 +3,16 @@ module.exports = {
     locales: ['en', 'es'],
     defaultLocale: 'en',
   },
-  future: {
-    webpack5: true,
-  },
   images: {
-    domains: [
-      'source.unsplash.com',
-      'instagram.feoh1-1.fna.fbcdn.net',
-      'instagram.feoh3-1.fna.fbcdn.net',
-      'cdn.shopify.com',
-    ],
+    domains: ['source.unsplash.com', 'cdn.shopify.com'],
+  },
+  async redirects() {
+    return [
+      {
+        source: '/admin',
+        destination: 'https://mydoxis-com.myshopify.com/admin',
+        permanent: true,
+      },
+    ]
   },
 }
