@@ -37,6 +37,14 @@ export default function AboutUs({ helpers }) {
                 DOXIS{' '}
                 <a
                   className='underline'
+                  href='https://www.instagram.com/mydoxis/'
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  @mydoxis
+                </a>{' '}
+                <a
+                  className='underline'
                   href='https://www.instagram.com/jowellgram/'
                   target='_blank'
                   rel='noreferrer'
@@ -50,14 +58,6 @@ export default function AboutUs({ helpers }) {
                   rel='noreferrer'
                 >
                   @randynotagram
-                </a>{' '}
-                <a
-                  className='underline'
-                  href='https://www.instagram.com/mydoxis/'
-                  target='_blank'
-                  rel='noreferrer'
-                >
-                  @mydoxis
                 </a>
                 <br />
                 LEYVAN{' '}
