@@ -193,7 +193,7 @@ export default function Collection({ collection, helpers }) {
             dangerouslySetInnerHTML={{
               __html: collection.descriptionHtml,
             }}
-          ></div>
+          />
         </div>
       </section>
     </Layout>
@@ -222,17 +222,10 @@ export async function getStaticProps({ params }) {
     handle: params.handle,
   }).id
 
-  let {
-    handle,
-    description,
-    descriptionHtml,
-    id,
-    image,
-    title,
-    products,
-  } = await client.collection.fetchWithProducts(collectionId, {
-    productsFirst: 100,
-  })
+  let { handle, description, descriptionHtml, id, image, title, products } =
+    await client.collection.fetchWithProducts(collectionId, {
+      productsFirst: 100,
+    })
 
   if (!image) image = { src: '' }
 

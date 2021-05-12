@@ -60,7 +60,7 @@ export default function Product({ product, helpers }) {
     )
   }
 
-  let description = product.description
+  let description = product.descriptionHtml
   const regex = /(.*)======(.*)/
   const translatedDesc = product.description.search(/======/)
   if (translatedDesc !== -1) {
@@ -123,7 +123,14 @@ export default function Product({ product, helpers }) {
                 {product.title}
               </h1>
               <h4 className='mb-10 text-2xl md:text-3xl font-semibold text-gray-500'>{`${product.variants[0].priceV2.currencyCode} $${state.price}`}</h4>
-              {description && <p className='mb-10'>{description}</p>}
+              {description && (
+                <div
+                  className='mb-10 text-base'
+                  dangerouslySetInnerHTML={{
+                    __html: description,
+                  }}
+                />
+              )}
               <div className='flex flex-col text-base sm:items-end sm:flex-row'>
                 {_.map(product.options, ({ id, name, values }) => {
                   if (name === 'Title') return
@@ -212,6 +219,7 @@ export async function getStaticProps({ params }) {
   const {
     availableForSale,
     description,
+    descriptionHtml,
     id,
     images,
     options,
@@ -227,6 +235,7 @@ export async function getStaticProps({ params }) {
       product: {
         availableForSale,
         description,
+        descriptionHtml,
         id,
         images: images.map(({ altText, id, src }) => {
           return { altText, id, src }
