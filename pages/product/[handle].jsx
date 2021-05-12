@@ -60,14 +60,18 @@ export default function Product({ product, helpers }) {
     )
   }
 
+  console.log(product.descriptionHtml)
+
   let description = product.descriptionHtml
-  const regex = /(.*)======(.*)/
-  const translatedDesc = product.description.search(/======/)
+  const regex = /(.*)======(.*)/s
+  const translatedDesc = product.descriptionHtml.search(/======/)
   if (translatedDesc !== -1) {
     locale === 'en'
-      ? (description = product.description.match(regex)[1])
-      : (description = product.description.match(regex)[2])
+      ? (description = product.descriptionHtml.match(regex)[1])
+      : (description = product.descriptionHtml.match(regex)[2])
   }
+
+  console.log(description)
 
   return (
     <Layout helpers={helpers}>
