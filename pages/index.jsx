@@ -329,6 +329,14 @@ export async function getStaticProps(context) {
 
   let posts = [
     {
+      url: 'CO8lXUqHJPs',
+      src: '/img/186286102_3790420714403071_2500341130161278253_n.jpg',
+    },
+    {
+      url: 'CO3ykb2HvUa',
+      src: '/img/185352763_1330088814055566_8590926752495608923_n.jpg',
+    },
+    {
       url: 'CORPcxenzLt',
       src: '/img/179056325_453645502388291_6008362691021113946_n.jpg',
     },
