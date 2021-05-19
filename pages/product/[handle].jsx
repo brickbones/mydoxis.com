@@ -60,8 +60,6 @@ export default function Product({ product, helpers }) {
     )
   }
 
-  console.log(product.descriptionHtml)
-
   let description = product.descriptionHtml
   const regex = /(.*)======(.*)/s
   const translatedDesc = product.descriptionHtml.search(/======/)
@@ -70,8 +68,6 @@ export default function Product({ product, helpers }) {
       ? (description = product.descriptionHtml.match(regex)[1])
       : (description = product.descriptionHtml.match(regex)[2])
   }
-
-  console.log(description)
 
   return (
     <Layout helpers={helpers}>

@@ -90,6 +90,15 @@ export default function Collection({ collection, helpers }) {
     // return window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  let description = collection.descriptionHtml
+  const regex = /(.*)======(.*)/s
+  const translatedDesc = collection.descriptionHtml.search(/======/)
+  if (translatedDesc !== -1) {
+    locale === 'en'
+      ? (description = collection.descriptionHtml.match(regex)[1])
+      : (description = collection.descriptionHtml.match(regex)[2])
+  }
+
   return (
     <Layout helpers={helpers}>
       <div
@@ -191,7 +200,7 @@ export default function Collection({ collection, helpers }) {
           <div
             className='mt-20 text-gray-900 text-lg md:text-xl max-w-prose'
             dangerouslySetInnerHTML={{
-              __html: collection.descriptionHtml,
+              __html: description,
             }}
           />
         </div>
