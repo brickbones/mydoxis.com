@@ -472,3 +472,19 @@ main {
 .filters button:focus {
   outline: 0;
 }
+
+.markdown > * {
+  @apply mb-6;
+}
+
+.markdown h1 {
+  @apply text-2xl;
+}
+
+.markdown h2 {
+  @apply text-xl;
+}
+
+.markdown a {
+  @apply underline;
+}

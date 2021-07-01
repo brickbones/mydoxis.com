@@ -61,6 +61,7 @@ export default function Cart({ helpers, checkout }) {
                             width='256'
                             height='256'
                             quality='35'
+                            unoptimized={process.env.NODE_ENV === 'development'}
                           />
                         </div>
                       </div>

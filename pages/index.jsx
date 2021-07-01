@@ -8,8 +8,10 @@ import SwiperCore, { Autoplay, Pagination, EffectFade } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import Link from 'next/link'
 import anime from 'animejs'
+import { datocms } from '../lib/datocms'
+import { m } from '../lib/helpers'
 
-export default function Home({ instagramPosts, products, helpers }) {
+export default function Home({ instagramPosts, products, helpers, datocmsData }) {
   const { locale } = useRouter()
   SwiperCore.use([Autoplay, Pagination, EffectFade])
 
@@ -74,6 +76,18 @@ export default function Home({ instagramPosts, products, helpers }) {
     })
   }, [])
 
+  const {
+    video,
+    featuredImages,
+    title,
+    subtitle,
+    description,
+    youtube01,
+    youtube02,
+    youtube03,
+    instagram,
+  } = datocmsData.home
+
   return (
     <Layout helpers={helpers}>
       <section className='relative hero'>
@@ -113,42 +127,31 @@ export default function Home({ instagramPosts, products, helpers }) {
                   autoPlay
                   playsInline
                 >
-                  <source src='/video/bg.webm' type='video/webm' />
-                  <source src='/video/bg.mp4' type='video/mp4' />
+                  <source src={video.url} type={video.mimeType} />
                 </video>
               </div>
             </div>
           </SwiperSlide>
-          <SwiperSlide>
-            <div className='relative'>
-              <div className='flex items-center justify-center h-screen px-10 py-32'>
-                <Image
-                  className='z-[-1]'
-                  src='/img/banner-collection.jpg'
-                  objectFit='cover'
-                  layout='fill'
-                  quality='85'
-                />
-              </div>
-            </div>
-          </SwiperSlide>
-          {/* <SwiperSlide>
-            <div className='relative'>
-              <div className='flex items-center justify-center h-screen px-10 py-32'>
-                <video
-                  className='video-bg absolute object-cover h-screen w-screen top-0 left-0 z-[-1]'
-                  poster='/video/bg-video.jpg'
-                  loop
-                  muted
-                  autoPlay
-                  playsInline
-                >
-                  <source src='/video/bg-video.webm' type='video/webm' />
-                  <source src='/video/bg-video.mp4' type='video/mp4' />
-                </video>
-              </div>
-            </div>
-          </SwiperSlide> */}
+
+          {featuredImages.length > 0 &&
+            featuredImages.map(({ url, alt }, i) => {
+              return (
+                <SwiperSlide key={i}>
+                  <div className='relative'>
+                    <div className='flex items-center justify-center h-screen px-10 py-32'>
+                      <Image
+                      className='z-[-1]'
+                        src={url}
+                        alt={alt}
+                        layout='fill'
+                        objectFit='cover'
+                        unoptimized={process.env.NODE_ENV === 'development'}
+                      />
+                    </div>
+                  </div>
+                </SwiperSlide>
+              )
+            })}
         </Swiper>
       </section>
 
@@ -170,6 +173,7 @@ export default function Home({ instagramPosts, products, helpers }) {
                             alt={product.handle}
                             objectFit='cover'
                             layout='fill'
+                            unoptimized={process.env.NODE_ENV === 'development'}
                           />
                         </div>
                       </a>
@@ -187,28 +191,22 @@ export default function Home({ instagramPosts, products, helpers }) {
 
       <section className='pb-32 overflow-hidden text-right'>
         <h1 className='px-10 py-4 mb-10 text-3xl md:text-4xl text-center md:text-right text-orange-900 uppercase bg-orange-500 md:inline-block md:my-20 font-display'>
-          <span className='hidden md:inline'>
-            Jowell &amp; Randy
-            <br />
-          </span>
-          {locale === 'en'
-            ? 'A new era in urban fashion'
-            : 'Nueva era en la moda urbana'}
+        <span className='block'>{title}</span>
+          <span className='block text-2xl lg:text-3xl'>{subtitle}</span>
         </h1>
         <div className='container px-6 pb-10 mx-auto text-left md:px-20'>
-          <p className='mb-20 text-yellow-900 max-w-prose text-xl dark:text-gray-400'>
-            {locale === 'en'
-              ? "Since our beginnings we have styled and dressed many artists. Among them are Jowell & Randy and their dancers. They wear DOXIS' products for every major show since 2012."
-              : 'Desde nuestros inicios hemos estilizado y vestido a muchos artistas. Entre ellos se encuentran Jowell & Randy y sus bailarines. Llevan los productos de DOXIS en todos los espectáculos importantes desde 2012.'}
-          </p>
+        <div
+            className='relative text-lg max-w-prose z-10 md:text-xl lg:mb-24 markdown'
+            dangerouslySetInnerHTML={{ __html: m(description) }}
+          />
           <div className='mb-12 lg:pl-96'>
             <div className='aspect-w-16 aspect-h-9'>
               <iframe
                 className='youtube'
-                title='Jowell y Randy x J Balvin - Anaranjado'
-                width='560'
-                height='315'
-                src='https://www.youtube-nocookie.com/embed/WcF8A9s3ldA?controls=0'
+                title={youtube01.title}
+                width={youtube01.width}
+                height={youtube01.height}
+                src={`https://www.youtube-nocookie.com/embed/${youtube01.providerUid}?controls=0`}
                 frameBorder='0'
                 allowFullScreen
               />
@@ -226,10 +224,10 @@ export default function Home({ instagramPosts, products, helpers }) {
             <div className='aspect-w-16 aspect-h-9'>
               <iframe
                 className='youtube'
-                title='Jowell y Randy - Perriando'
-                width='560'
-                height='315'
-                src='https://www.youtube-nocookie.com/embed/81GgDM-MdBA?controls=0'
+                title={youtube02.title}
+                width={youtube02.width}
+                height={youtube02.height}
+                src={`https://www.youtube-nocookie.com/embed/${youtube02.providerUid}?controls=0`}
                 frameBorder='0'
                 allowFullScreen
               />
@@ -239,10 +237,10 @@ export default function Home({ instagramPosts, products, helpers }) {
             <div className='aspect-w-16 aspect-h-9'>
               <iframe
                 className='youtube'
-                title='Jowell y Randy, Kiko El Crazy - Se Acabó La Cuarentena'
-                width='560'
-                height='315'
-                src='https://www.youtube-nocookie.com/embed/EwLYDWew1rk?controls=0'
+                title={youtube03.title}
+                width={youtube03.width}
+                height={youtube03.height}
+                src={`https://www.youtube-nocookie.com/embed/${youtube03.providerUid}?controls=0`}
                 frameBorder='0'
                 allowFullScreen
               />
@@ -285,25 +283,24 @@ export default function Home({ instagramPosts, products, helpers }) {
             1024: { slidesPerView: 4 },
           }}
         >
-          {_.map(instagramPosts, ({ url, src, title }, i) => {
-            return (
-              <SwiperSlide className='p-4 loading' key={i}>
-                <a
-                  className='block overflow-hidden rounded-sm max-w-[100%] aspect-w-1 aspect-h-1'
-                  href={`https://www.instagram.com/p/${url}`}
-                  target='_blank'
-                  rel='noreferrer'
-                >
-                  <Image
-                    src={src}
-                    alt='Instagram image from @mydoxis'
-                    objectFit='cover'
-                    layout='fill'
-                  />
-                </a>
-              </SwiperSlide>
-            )
-          })}
+          {instagram.map(({ url, blurUpThumb, alt }, i) => {
+                return (
+                  <SwiperSlide className='p-8 sm:p-4' key={i}>
+                    <div
+                      className='overflow-hidden rounded-md aspect-w-1 aspect-h-1 bg-cover'
+                      style={{ backgroundImage: `url(${blurUpThumb})` }}
+                    >
+                      <Image
+                        src={url}
+                        alt={alt}
+                        layout='fill'
+                        objectFit='cover'
+                        unoptimized={process.env.NODE_ENV === 'development'}
+                      />
+                    </div>
+                  </SwiperSlide>
+                )
+              })}
         </Swiper>
       </section>
     </Layout>
@@ -311,6 +308,56 @@ export default function Home({ instagramPosts, products, helpers }) {
 }
 
 export async function getStaticProps(context) {
+  const datocmsData = await datocms({
+    query: `query Home($locale: SiteLocale) {
+      home(locale: $locale) {
+        video {
+          url
+          blurUpThumb
+        }
+        featuredImages {
+          url
+          blurUpThumb
+          alt
+        }
+        title
+        subtitle
+        description
+        youtube01 {
+          height
+          provider
+          providerUid
+          url
+          width
+          title
+        }
+        youtube02 {
+          height
+          provider
+          providerUid
+          title
+          url
+          width
+        }
+        youtube03 {
+          height
+          provider
+          providerUid
+          title
+          url
+          width
+        }
+        instagram {
+          url
+          blurUpThumb
+          alt
+        }
+      }
+    }`,
+    variables: { locale: context.locale },
+  })
+
+
   const client = Client.buildClient({
     domain: process.env.NEXT_PUBLIC_STORE_DOMAIN,
     storefrontAccessToken: process.env.NEXT_PUBLIC_ACCESS_TOKEN,
@@ -380,6 +427,7 @@ export async function getStaticProps(context) {
 
   return {
     props: {
+      datocmsData,
       instagramPosts: posts,
       products: _.sortBy(
         products.map(

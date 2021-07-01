@@ -92,6 +92,7 @@ export default function Product({ product, helpers }) {
                     objectFit='cover'
                     layout='fill'
                     quality='5'
+                    unoptimized={process.env.NODE_ENV === 'development'}
                   />
                   <Image
                     src={src}
@@ -99,6 +100,7 @@ export default function Product({ product, helpers }) {
                     objectFit='contain'
                     layout='fill'
                     quality='85'
+                    unoptimized={process.env.NODE_ENV === 'development'}
                   />
                 </div>
               </SwiperSlide>

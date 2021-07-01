@@ -1,114 +1,87 @@
 import { useRouter } from 'next/router'
 import Image from 'next/image'
+import { datocms } from '../lib/datocms'
+import { m } from '../lib/helpers'
 
 import Layout from '../components/layout'
 
-export default function AboutUs({ helpers }) {
+export default function AboutUs({ helpers, datocmsData }) {
   const { locale } = useRouter()
+
+  const { video, featuredImage, title, description, products, address } =
+    datocmsData.about
 
   return (
     <Layout helpers={helpers}>
       <section className='pb-32 text-right bg-gradient-to-r from-gray-200 to-gray-300'>
         <h1 className='px-10 py-4 mb-10 text-3xl text-center text-orange-900 uppercase bg-orange-500 md:text-4xl md:inline-block md:my-20 font-display'>
-          {locale === 'en' ? 'What is DOXIS?' : '¿Qué es DOXIS?'}
+          {title}
         </h1>
         <div className='container px-6 pb-10 mx-auto text-left md:px-20'>
-          <p className='mb-10 text-gray-900 max-w-prose text-xl md:text-2xl'>
-            {locale === 'en'
-              ? 'DOXIS is an eco-friendly lifestyle brand that welcomes music, art, life and all the good things that comes with it.'
-              : 'DOXIS es una marca con estilo de vida; respetuosa del medio ambiente que acoge a la música, el arte, la vida y las buenas cosas que hay en ella.'}
-          </p>
-          <p className='mb-10 text-gray-900 max-w-prose text-xl'>
-            {locale === 'en'
-              ? 'DOXIS name is a wordplay that has Spanish references, since GOD in Spanish translates DIOS and the X in the middle means mystery-higher power then DOXIS stands for God-music-art-life. DOXIS logo is a test tube with the "eye of God" in it. It reminds us to never give up in our dreams, also represents our willingness to experiment new techniques to reach our goals.'
-              : 'El nombre de DOXIS es un juego de palabras en español donde DIOS mas la letra X conforman la palabra DOXIS así que DOXIS significa: Dios-música-arte-vida. El logo de DOXIS es un tubo de ensayo con el "ojo de Dios" para recordarnos de nunca renunciar a nuestros sueños, también representa probar nuevas técnicas para lograr nuestras metas.'}
-          </p>
+          <div
+            className='mb-10 text-gray-900 max-w-prose text-xl markdown'
+            dangerouslySetInnerHTML={{ __html: m(description) }}
+          />
           <div className='mb-20 md:flex md:justify-between max-w-prose'>
             <div className='flex-1 mb-10 text-lg'>
               <h4 className='mb-5 text-lg font-semibold'>
                 {locale === 'en' ? 'Products' : 'Productos'}
               </h4>
-              <p>
-                DOXIS{' '}
-                <a
-                  className='underline'
-                  href='https://www.instagram.com/mydoxis/'
-                  target='_blank'
-                  rel='noreferrer'
-                >
-                  @mydoxis
-                </a>{' '}
-                <a
-                  className='underline'
-                  href='https://www.instagram.com/jowellgram/'
-                  target='_blank'
-                  rel='noreferrer'
-                >
-                  @jowellgram
-                </a>{' '}
-                <a
-                  className='underline'
-                  href='https://www.instagram.com/randynotagram/'
-                  target='_blank'
-                  rel='noreferrer'
-                >
-                  @randynotagram
-                </a>
-                <br />
-                LEYVAN{' '}
-                <a
-                  className='underline'
-                  href='https://www.instagram.com/26leyvan_aa/'
-                  target='_blank'
-                  rel='noreferrer'
-                >
-                  @26leyvan_aa
-                </a>
-                <br />
-                JUANFRAN{' '}
-                <a
-                  className='underline'
-                  href='https://www.instagram.com/juanfran.oficial/'
-                  target='_blank'
-                  rel='noreferrer'
-                >
-                  @juanfran.oficial
-                </a>
-                <br />
-                VICTOR PEREZ{' '}
-                <a
-                  className='underline'
-                  href='https://www.instagram.com/victorperez/'
-                  target='_blank'
-                  rel='noreferrer'
-                >
-                  @victorperez
-                </a>
-              </p>
+              <div
+                className='markdown'
+                dangerouslySetInnerHTML={{ __html: m(products) }}
+              />
             </div>
             <div className='flex-1 mb-10 text-lg'>
               <h4 className='mb-5 text-lg font-semibold'>
                 {locale === 'en' ? 'Address' : 'Dirección'}
               </h4>
-              <p>
-                913 Jefferson Blvd,
-                <br />
-                Orlando FL 32822
-                <br />
-                USA
-              </p>
+              <div
+                className='markdown'
+                dangerouslySetInnerHTML={{ __html: m(address) }}
+              />
             </div>
           </div>
 
-          <div className='lg:ml-72'>
+          <div
+            className='lg:ml-72 bg-cover'
+            style={{ backgroundImage: `url(${featuredImage.blurUpThumb})` }}
+          >
             <Image
-              src='https://source.unsplash.com/1000x600'
-              width='1000'
-              height='600'
+              src={featuredImage.url}
+              layout='responsive'
+              width={featuredImage.width}
+              height={featuredImage.height}
+              unoptimized={process.env.NODE_ENV === 'development'}
             />
           </div>
         </div>
       </section>
     </Layout>
   )
+}
+
+export async function getStaticProps(context) {
+  const datocmsData = await datocms({
+    query: `query About($locale: SiteLocale) {
+      about(locale: $locale) {
+        featuredImage {
+          url
+          blurUpThumb
+          alt
+          width
+          height
+        }
+        title
+        description
+        products
+        address
+      }
+    }`,
+    variables: { locale: context.locale },
+  })
+
+  return {
+    props: { datocmsData },
+  }
 }

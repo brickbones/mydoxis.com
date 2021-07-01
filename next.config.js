@@ -4,7 +4,7 @@ module.exports = {
     defaultLocale: 'en',
   },
   images: {
-    domains: ['source.unsplash.com', 'cdn.shopify.com'],
+    domains: ['www.datocms-assets.com', 'cdn.shopify.com'],
   },
   async redirects() {
     return [
@@ -13,6 +13,11 @@ module.exports = {
         destination: 'https://mydoxis-com.myshopify.com/admin',
         permanent: true,
       },
+      {
+        source: '/admin-cms',
+        destination: 'https://mydoxis.admin.datocms.com',
+        permanent: true
+      }
     ]
   },
 }

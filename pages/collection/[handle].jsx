@@ -6,6 +6,7 @@ import Client from 'shopify-buy'
 import Link from 'next/link'
 import Image from 'next/image'
 import anime from 'animejs'
+import { i } from '../../lib/helpers'
 
 const client = Client.buildClient({
   domain: process.env.NEXT_PUBLIC_STORE_DOMAIN,
@@ -109,7 +110,12 @@ export default function Collection({ collection, helpers }) {
         }`}
       >
         {collection.image.src && (
-          <Image src={collection.image.src} objectFit='cover' layout='fill' />
+          <Image
+            src={collection.image.src}
+            objectFit='cover'
+            layout='fill'
+            unoptimized={process.env.NODE_ENV === 'development'}
+          />
         )}
       </div>
       <section className='pb-32 text-center md:text-right bg-gradient-to-r from-gray-200 to-gray-300'>
@@ -177,6 +183,9 @@ export default function Collection({ collection, helpers }) {
                               alt={product.handle}
                               objectFit='cover'
                               layout='fill'
+                              unoptimized={
+                                process.env.NODE_ENV === 'development'
+                              }
                             />
                           </div>
                         </a>
@@ -200,7 +209,7 @@ export default function Collection({ collection, helpers }) {
           <div
             className='mt-20 text-gray-900 text-lg md:text-xl max-w-prose'
             dangerouslySetInnerHTML={{
-              __html: description,
+              __html: i(description),
             }}
           />
         </div>
