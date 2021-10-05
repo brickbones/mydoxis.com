@@ -119,7 +119,7 @@ export default function Collection({ collection, helpers }) {
         )}
       </div>
       <section className='pb-32 text-center md:text-right bg-gradient-to-r from-gray-200 to-gray-300'>
-        <h1 className='px-10 py-4 mb-10 text-3xl md:text-4xl text-orange-900 uppercase bg-orange-500 md:inline-block md:my-20 font-display'>
+        <h1 className='px-10 py-4 mb-10 text-3xl md:text-4xl text-gray-600 uppercase bg-gray-400 md:inline-block md:my-20 font-display'>
           {locale === 'en'
             ? `${collection.title} Collection`
             : `Colección ${collection.title}`}
