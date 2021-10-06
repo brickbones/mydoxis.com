@@ -22,7 +22,7 @@ export default function Collection({ collection, helpers }) {
     filters.push(product.productType.toLowerCase())
   })
 
-  filters = _.sortBy(_.compact(_.uniq(filters)))
+  filters = _.compact(_.uniq(filters))
 
   function handleFilter(filter) {
     const cards = document.querySelectorAll('.card-container')
@@ -257,67 +257,62 @@ export async function getStaticProps({ params }) {
         id,
         image: { src: image.src },
         title,
-        products: _.sortBy(
-          products.map(
-            ({
+        products: products.map(
+          ({
+            availableForSale,
+            description,
+            handle,
+            id,
+            images,
+            options,
+            productType,
+            createdAt,
+            title,
+            variants,
+            vendor,
+          }) => {
+            return {
               availableForSale,
               description,
+              descriptionHtml,
               handle,
               id,
-              images,
-              options,
+              images: images.map(({ altText, id, src }) => {
+                return { altText, id, src }
+              }),
+              options: options.map(({ id, name, values }) => {
+                return {
+                  id,
+                  name,
+                  values: values.map(({ value }) => value),
+                }
+              }),
               productType,
               createdAt,
               title,
-              variants,
-              vendor,
-            }) => {
-              return {
-                availableForSale,
-                description,
-                descriptionHtml,
-                handle,
-                id,
-                images: images.map(({ altText, id, src }) => {
-                  return { altText, id, src }
-                }),
-                options: options.map(({ id, name, values }) => {
+              variants: variants.map(
+                ({ available, id, priceV2, selectedOptions, title }) => {
                   return {
+                    available,
                     id,
-                    name,
-                    values: values.map(({ value }) => value),
+                    priceV2: {
+                      amount: priceV2.amount,
+                      currencyCode: priceV2.currencyCode,
+                    },
+                    selectedOptions: selectedOptions.map(({ name, value }) => {
+                      return {
+                        name,
+                        value,
+                      }
+                    }),
+                    title,
                   }
-                }),
-                productType,
-                createdAt,
-                title,
-                variants: variants.map(
-                  ({ available, id, priceV2, selectedOptions, title }) => {
-                    return {
-                      available,
-                      id,
-                      priceV2: {
-                        amount: priceV2.amount,
-                        currencyCode: priceV2.currencyCode,
-                      },
-                      selectedOptions: selectedOptions.map(
-                        ({ name, value }) => {
-                          return {
-                            name,
-                            value,
-                          }
-                        }
-                      ),
-                      title,
-                    }
-                  }
-                ),
-                vendor,
-              }
+                }
+              ),
+              vendor,
             }
-          ),
-          ['createdAt']
-        ).reverse(),
+          }
+        ),
       },
     },
   }
