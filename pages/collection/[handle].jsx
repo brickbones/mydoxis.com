@@ -19,7 +19,7 @@ export default function Collection({ collection, helpers }) {
   let filters = []
 
   _.each(collection.products, (product) => {
-    filters.push(product.productType.toLowerCase())
+    filters.push(product.productType.toLowerCase().replace(/[^A-Z0-9]/gi, '_'))
   })
 
   filters = _.compact(_.uniq(filters))
@@ -169,7 +169,9 @@ export default function Collection({ collection, helpers }) {
                   <div
                     key={product.id}
                     className='card-container flex flex-col'
-                    data-product-type={product.productType.toLowerCase()}
+                    data-product-type={product.productType
+                      .toLowerCase()
+                      .replace(/[^A-Z0-9]/gi, '_')}
                   >
                     <figure className='transition transform bg-gray-100 card flex flex-col flex-1'>
                       <Link
