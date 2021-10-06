@@ -146,7 +146,7 @@ export default function Collection({ collection, helpers }) {
                   <button
                     key={key}
                     className={`px-2 py-1 text-sm tracking-wider uppercase  rounded whitespace-nowrap m-1 cursor-pointer font-semibold ${
-                      state === filter
+                      state === filter.replace(/[^A-Z0-9]/gi, '_')
                         ? 'bg-orange-400 text-orange-900'
                         : 'bg-gray-400 text-gray-200'
                     }`}
