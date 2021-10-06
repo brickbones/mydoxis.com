@@ -25,6 +25,7 @@ export default function Layout({ children, helpers, checkout }) {
       <Head>
         <meta name='viewport' content='width=device-width,initial-scale=1' />
         <title>{title}</title>
+        <meta name='theme-color' content='#f6581e' />
         <meta name='description' content={description} />
         <link rel='icon' type='image/png' href='/favicon.png' />
         <meta name='keywords' content={keywords} />
