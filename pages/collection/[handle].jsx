@@ -19,7 +19,7 @@ export default function Collection({ collection, helpers }) {
   let filters = []
 
   _.each(collection.products, (product) => {
-    filters.push(product.productType.toLowerCase().replace(/[^A-Z0-9]/gi, '_'))
+    filters.push(product.productType.toLowerCase())
   })
 
   filters = _.compact(_.uniq(filters))
@@ -150,10 +150,10 @@ export default function Collection({ collection, helpers }) {
                         ? 'bg-orange-400 text-orange-900'
                         : 'bg-gray-400 text-gray-200'
                     }`}
-                    data-filter={filter}
+                    data-filter={filter.replace(/[^A-Z0-9]/gi, '_')}
                     onClick={() => {
-                      setState(filter)
-                      handleFilter(filter)
+                      setState(filter.replace(/[^A-Z0-9]/gi, '_'))
+                      handleFilter(filter.replace(/[^A-Z0-9]/gi, '_'))
                     }}
                   >
                     {filter}
