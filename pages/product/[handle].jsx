@@ -83,17 +83,7 @@ export default function Product({ product, helpers }) {
           >
             {product.images.map(({ id, src, altText }) => (
               <SwiperSlide key={id}>
-                <div className='aspect-w-2 aspect-h-3 md:aspect-none md:h-screen loading'>
-                  <Image
-                    className='filter blur-xl'
-                    style={{ willChange: 'transform' }}
-                    src={src}
-                    alt={altText}
-                    objectFit='cover'
-                    layout='fill'
-                    quality='5'
-                    unoptimized={process.env.NODE_ENV === 'development'}
-                  />
+                <div className='aspect-w-2 aspect-h-3 md:aspect-none md:h-screen bg-gray-200'>
                   <Image
                     src={src}
                     alt={altText}
