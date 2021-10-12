@@ -72,7 +72,7 @@ export default function Product({ product, helpers }) {
   return (
     <Layout helpers={helpers}>
       <section className='lg:flex'>
-        <div className='overflow-hidden flex lg:w-1/2'>
+        <div className='overflow-hidden flex lg:w-1/2 bg-gray-200'>
           <Swiper
             className='flex-1'
             pagination={{ clickable: true }}
@@ -83,7 +83,7 @@ export default function Product({ product, helpers }) {
           >
             {product.images.map(({ id, src, altText }) => (
               <SwiperSlide key={id}>
-                <div className='aspect-w-2 aspect-h-3 md:aspect-none md:h-screen bg-gray-200'>
+                <div className='aspect-w-2 aspect-h-3 md:aspect-none md:h-screen loading'>
                   <Image
                     src={src}
                     alt={altText}
