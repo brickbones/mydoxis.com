@@ -54,6 +54,24 @@ export default function Layout({ children, helpers, checkout }) {
       <div className='page-content md:flex'>
         <Header helpers={helpers} checkout={checkout} />
         <main className='min-w-0 md:flex-1'>
+          <div className='marquee-global'>
+            <div className='marquee-content'>
+              <span>NEW COLLABS AVAILABLE NOW</span>
+              <span>NUEVAS COLABORACIONES DISPONIBLES</span>
+              <span>NEW COLLABS AVAILABLE NOW</span>
+              <span>NUEVAS COLABORACIONES DISPONIBLES</span>
+              <span>NEW COLLABS AVAILABLE NOW</span>
+              <span>NUEVAS COLABORACIONES DISPONIBLES</span>
+              <span>NEW COLLABS AVAILABLE NOW</span>
+              <span>NUEVAS COLABORACIONES DISPONIBLES</span>
+              <span>NEW COLLABS AVAILABLE NOW</span>
+              <span>NUEVAS COLABORACIONES DISPONIBLES</span>
+              <span>NEW COLLABS AVAILABLE NOW</span>
+              <span>NUEVAS COLABORACIONES DISPONIBLES</span>
+              <span>NEW COLLABS AVAILABLE NOW</span>
+              <span>NUEVAS COLABORACIONES DISPONIBLES</span>
+            </div>
+          </div>
           {children}
           <Footer />
         </main>

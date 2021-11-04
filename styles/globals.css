@@ -488,3 +488,39 @@ main {
 .markdown a {
   @apply underline;
 }
+
+.marquee-global {
+  background-color: rgb(246, 88, 30);
+  position: relative;
+  overflow: hidden;
+  --offset: 20vw;
+  --move-initial: calc(-25% + var(--offset));
+  --move-final: calc(-50% + var(--offset));
+}
+
+.marquee-content {
+  width: fit-content;
+  display: flex;
+  position: relative;
+  transform: translate3d(var(--move-initial), 0, 0);
+  animation: marquee 15s linear infinite;
+}
+
+.marquee-global span {
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  padding: 0.35rem 2vw;
+  white-space: nowrap;
+  font-weight: bold;
+  color: rgb(89, 26, 4);
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate3d(var(--move-initial), 0, 0);
+  }
+
+  100% {
+    transform: translate3d(var(--move-final), 0, 0);
+  }
+}
