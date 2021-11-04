@@ -11,7 +11,12 @@ import anime from 'animejs'
 import { datocms } from '../lib/datocms'
 import { m } from '../lib/helpers'
 
-export default function Home({ instagramPosts, products, helpers, datocmsData }) {
+export default function Home({
+  instagramPosts,
+  products,
+  helpers,
+  datocmsData,
+}) {
   const { locale } = useRouter()
   SwiperCore.use([Autoplay, Pagination, EffectFade])
 
@@ -116,7 +121,7 @@ export default function Home({ instagramPosts, products, helpers, datocmsData })
             disableOnInteraction: false,
           }}
         >
-          <SwiperSlide>
+          {/* <SwiperSlide>
             <div className='relative'>
               <div className='flex items-center justify-center h-screen px-10 py-32'>
                 <video
@@ -131,7 +136,7 @@ export default function Home({ instagramPosts, products, helpers, datocmsData })
                 </video>
               </div>
             </div>
-          </SwiperSlide>
+          </SwiperSlide> */}
 
           {featuredImages.length > 0 &&
             featuredImages.map(({ url, alt }, i) => {
@@ -140,7 +145,6 @@ export default function Home({ instagramPosts, products, helpers, datocmsData })
                   <div className='relative'>
                     <div className='flex items-center justify-center h-screen px-10 py-32'>
                       <Image
-                      className='z-[-1]'
                         src={url}
                         alt={alt}
                         layout='fill'
@@ -191,11 +195,11 @@ export default function Home({ instagramPosts, products, helpers, datocmsData })
 
       <section className='pb-32 overflow-hidden text-right'>
         <h1 className='px-10 py-4 mb-10 text-3xl md:text-4xl text-center md:text-right text-orange-900 uppercase bg-orange-500 md:inline-block md:my-20 font-display'>
-        <span className='block'>{title}</span>
+          <span className='block'>{title}</span>
           <span className='block text-2xl lg:text-3xl'>{subtitle}</span>
         </h1>
         <div className='container px-6 pb-10 mx-auto text-left md:px-20'>
-        <div
+          <div
             className='relative text-lg max-w-prose z-10 md:text-xl lg:mb-24 markdown'
             dangerouslySetInnerHTML={{ __html: m(description) }}
           />
@@ -284,23 +288,23 @@ export default function Home({ instagramPosts, products, helpers, datocmsData })
           }}
         >
           {instagram.map(({ url, blurUpThumb, alt }, i) => {
-                return (
-                  <SwiperSlide className='p-8 sm:p-4' key={i}>
-                    <div
-                      className='overflow-hidden rounded-md aspect-w-1 aspect-h-1 bg-cover'
-                      style={{ backgroundImage: `url(${blurUpThumb})` }}
-                    >
-                      <Image
-                        src={url}
-                        alt={alt}
-                        layout='fill'
-                        objectFit='cover'
-                        unoptimized={process.env.NODE_ENV === 'development'}
-                      />
-                    </div>
-                  </SwiperSlide>
-                )
-              })}
+            return (
+              <SwiperSlide className='p-8 sm:p-4' key={i}>
+                <div
+                  className='overflow-hidden rounded-md aspect-w-1 aspect-h-1 bg-cover'
+                  style={{ backgroundImage: `url(${blurUpThumb})` }}
+                >
+                  <Image
+                    src={url}
+                    alt={alt}
+                    layout='fill'
+                    objectFit='cover'
+                    unoptimized={process.env.NODE_ENV === 'development'}
+                  />
+                </div>
+              </SwiperSlide>
+            )
+          })}
         </Swiper>
       </section>
     </Layout>
@@ -356,7 +360,6 @@ export async function getStaticProps(context) {
     }`,
     variables: { locale: context.locale },
   })
-
 
   const client = Client.buildClient({
     domain: process.env.NEXT_PUBLIC_STORE_DOMAIN,
