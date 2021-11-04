@@ -165,30 +165,44 @@ export default function Home({
         </h1>
         <div className='container px-6 pb-10 mx-auto text-left md:px-20'>
           <div className='grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-            {_.map(products.slice(0, 8), (product) => {
-              return (
-                <div key={product.id} className='card-container flex flex-col'>
-                  <figure className='transition transform bg-gray-100 card flex flex-col flex-1'>
-                    <Link href={`/product/${product.handle}/`} locale={locale}>
-                      <a>
-                        <div className='aspect-w-2 aspect-h-3 loading'>
-                          <Image
-                            src={product.images[0].src}
-                            alt={product.handle}
-                            objectFit='cover'
-                            layout='fill'
-                            unoptimized={process.env.NODE_ENV === 'development'}
-                          />
-                        </div>
-                      </a>
-                    </Link>
-                    <figcaption className='px-4 py-2.5 text-base md:text-xs font-semibold tracking-wider text-center text-gray-500 uppercase flex flex-col flex-1 justify-center'>
-                      {product.title}
-                    </figcaption>
-                  </figure>
-                </div>
-              )
-            })}
+            {_.map(
+              _.filter(
+                products,
+                (product) => product.productType !== 'Socks'
+              ).slice(0, 16),
+              (product) => {
+                return (
+                  <div
+                    key={product.id}
+                    className='card-container flex flex-col'
+                  >
+                    <figure className='transition transform bg-gray-100 card flex flex-col flex-1'>
+                      <Link
+                        href={`/product/${product.handle}/`}
+                        locale={locale}
+                      >
+                        <a>
+                          <div className='aspect-w-2 aspect-h-3 loading'>
+                            <Image
+                              src={product.images[0].src}
+                              alt={product.handle}
+                              objectFit='cover'
+                              layout='fill'
+                              unoptimized={
+                                process.env.NODE_ENV === 'development'
+                              }
+                            />
+                          </div>
+                        </a>
+                      </Link>
+                      <figcaption className='px-4 py-2.5 text-base md:text-xs font-semibold tracking-wider text-center text-gray-500 uppercase flex flex-col flex-1 justify-center'>
+                        {product.title}
+                      </figcaption>
+                    </figure>
+                  </div>
+                )
+              }
+            )}
           </div>
         </div>
       </section>
@@ -366,16 +380,16 @@ export async function getStaticProps(context) {
     storefrontAccessToken: process.env.NEXT_PUBLIC_ACCESS_TOKEN,
   })
 
-  // const products = await client.product.fetchAll(100)
-  const collections = await client.collection.fetchAllWithProducts()
-  const collectionId = _.find(collections, {
-    handle: 'doxis',
-  }).id
+  const products = await client.product.fetchAll(100)
+  // const collections = await client.collection.fetchAllWithProducts()
+  // const collectionId = _.find(collections, {
+  //   handle: 'doxis',
+  // }).id
 
-  let { handle, description, descriptionHtml, id, image, title, products } =
-    await client.collection.fetchWithProducts(collectionId, {
-      productsFirst: 100,
-    })
+  // let { handle, description, descriptionHtml, id, image, title, products } =
+  //   await client.collection.fetchWithProducts(collectionId, {
+  //     productsFirst: 100,
+  //   })
 
   let posts = [
     {
