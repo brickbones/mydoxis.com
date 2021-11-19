@@ -217,53 +217,53 @@ export default function Home({
             className='relative text-lg max-w-prose z-10 md:text-xl lg:mb-24 markdown'
             dangerouslySetInnerHTML={{ __html: m(description) }}
           />
-          <div className='mb-12 lg:pl-96'>
-            <div className='aspect-w-16 aspect-h-9'>
-              <iframe
-                className='youtube'
-                title={youtube01.title}
-                width={youtube01.width}
-                height={youtube01.height}
-                src={`https://www.youtube-nocookie.com/embed/${youtube01.providerUid}?controls=0`}
-                frameBorder='0'
-                allowFullScreen
-              />
-              {_.map(Array(5), (circle, i) => {
-                return (
-                  <div
-                    key={i}
-                    className={`bg-orange-500 hidden md:block w-96 h-96 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border border-orange-500 bg-opacity-25 rounded-full circle-0${i} z-[-1]`}
-                  />
-                )
-              })}
-            </div>
-          </div>
-          <div className='mb-12 lg:pr-96 lg:pl-10'>
-            <div className='aspect-w-16 aspect-h-9'>
-              <iframe
-                className='youtube'
-                title={youtube02.title}
-                width={youtube02.width}
-                height={youtube02.height}
-                src={`https://www.youtube-nocookie.com/embed/${youtube02.providerUid}?controls=0`}
-                frameBorder='0'
-                allowFullScreen
-              />
-            </div>
-          </div>
-          <div className='lg:pr-32 lg:pl-96'>
-            <div className='aspect-w-16 aspect-h-9'>
-              <iframe
-                className='youtube'
-                title={youtube03.title}
-                width={youtube03.width}
-                height={youtube03.height}
-                src={`https://www.youtube-nocookie.com/embed/${youtube03.providerUid}?controls=0`}
-                frameBorder='0'
-                allowFullScreen
-              />
-            </div>
-          </div>
+          {[youtube01, youtube02, youtube03].map(
+            ({ title, width, height, provider, providerUid }, i) => {
+              if (provider !== 'youtube' || !providerUid) return <></>
+              let options = {
+                size: 'md:w-2/3',
+                margin: 'md:ml-auto md:mr-0',
+              }
+              if (i === 1)
+                options = {
+                  size: 'md:w-3/5',
+                  margin: 'md:ml-10 md:mr-auto',
+                }
+              if (i === 2)
+                options = {
+                  size: 'md:w-1/2',
+                  margin: 'md:ml-auto md:mr-32',
+                }
+              return (
+                <div
+                  className={`relative mt-12 z-0 ${options.size} ${options.margin}`}
+                  key={i}
+                >
+                  <div className='aspect-w-16 aspect-h-9 overflow-hidden rounded-lg z-10'>
+                    <iframe
+                      title={title}
+                      width={width}
+                      height={height}
+                      src={`https://www.youtube-nocookie.com/embed/${providerUid}?controls=0&rel=0&loop=1`}
+                      srcDoc={`<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube-nocookie.com/embed/${providerUid}?controls=0&rel=0&loop=1&autoplay=1><img src=https://img.youtube.com/vi/${providerUid}/hqdefault.jpg alt='${title}'><span>▶</span></a>`}
+                      frameBorder='0'
+                      allowFullScreen
+                      loading='lazy'
+                    />
+                  </div>
+                  {i === 0 &&
+                    [...Array(5)].map((circle, i) => {
+                      return (
+                        <div
+                          className={`bg-orange hidden md:block w-96 h-96 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-orange border-opacity-60 bg-opacity-40 rounded-full pointer-events-none z-0 circle circle-${i}`}
+                          key={i}
+                        />
+                      )
+                    })}
+                </div>
+              )
+            }
+          )}
         </div>
       </section>
 
