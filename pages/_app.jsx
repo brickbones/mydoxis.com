@@ -8,10 +8,7 @@ import 'tailwindcss/tailwind.css'
 import '../styles/globals.css'
 import '@fontsource/roboto-slab/latin-400.css'
 import '@fontsource/roboto-slab/latin-600.css'
-import 'swiper/swiper.scss'
-import 'swiper/components/navigation/navigation.scss'
-import 'swiper/components/pagination/pagination.scss'
-import 'swiper/components/effect-fade/effect-fade.scss'
+import 'swiper/css'
 
 export default function App({ Component, pageProps }) {
   const router = useRouter()
