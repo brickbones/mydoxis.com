@@ -6,6 +6,8 @@ import NProgress from 'nprogress'
 
 import 'tailwindcss/tailwind.css'
 import '../styles/globals.css'
+import '@fontsource/roboto-slab/latin-400.css'
+import '@fontsource/roboto-slab/latin-600.css'
 import 'swiper/css'
 
 export default function App({ Component, pageProps }) {
