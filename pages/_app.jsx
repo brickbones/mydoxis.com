@@ -24,19 +24,27 @@ export default function App({ Component, pageProps }) {
   })
 
   async function addProductToCart(variantId, quantity) {
-    setState({
-      checkout: await client.checkout.addLineItems(state.checkout.id, [
-        { variantId, quantity },
-      ]),
-    })
+    try {
+      setState({
+        checkout: await client.checkout.addLineItems(state.checkout.id, [
+          { variantId, quantity },
+        ]),
+      })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   async function removeProductFromCart(variantId) {
-    setState({
-      checkout: await client.checkout.removeLineItems(state.checkout.id, [
-        variantId,
-      ]),
-    })
+    try {
+      setState({
+        checkout: await client.checkout.removeLineItems(state.checkout.id, [
+          variantId,
+        ]),
+      })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   function cartCount() {
@@ -48,21 +56,25 @@ export default function App({ Component, pageProps }) {
 
   useEffect(() => {
     ;(async () => {
-      if ('shopify-checkout-id' in localStorage) {
-        setState({
-          checkout: await client.checkout.fetch(
-            localStorage.getItem('shopify-checkout-id')
-          ),
-        })
-      }
+      try {
+        if ('shopify-checkout-id' in localStorage) {
+          setState({
+            checkout: await client.checkout.fetch(
+              localStorage.getItem('shopify-checkout-id')
+            ),
+          })
+        }
 
-      if (
-        state.checkout.completedAt ||
-        'shopify-checkout-id' in localStorage === false
-      ) {
-        const checkout = await client.checkout.create()
-        setState({ checkout })
-        localStorage.setItem('shopify-checkout-id', checkout.id)
+        if (
+          state.checkout.completedAt ||
+          'shopify-checkout-id' in localStorage === false
+        ) {
+          const checkout = await client.checkout.create()
+          setState({ checkout })
+          localStorage.setItem('shopify-checkout-id', checkout.id)
+        }
+      } catch (error) {
+        console.log(error)
       }
     })()
 
