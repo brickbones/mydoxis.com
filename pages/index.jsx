@@ -380,7 +380,7 @@ export async function getStaticProps(context) {
     storefrontAccessToken: process.env.NEXT_PUBLIC_ACCESS_TOKEN,
   })
 
-  const products = await client.product.fetchAll(100)
+  const products = await client.product.fetchAll(50)
   // const collections = await client.collection.fetchAllWithProducts()
   // const collectionId = _.find(collections, {
   //   handle: 'doxis',

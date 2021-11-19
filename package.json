@@ -8,7 +8,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "@fontsource/roboto-slab": "^4.2.2",
     "@tailwindcss/aspect-ratio": "^0.3.0",
     "animejs": "^3.2.1",
     "graphql": "^15.7.2",
